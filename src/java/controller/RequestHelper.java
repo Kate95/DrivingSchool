@@ -5,8 +5,11 @@
  */
 package controller;
 
+import controller.commands.AddExamIntoDBCommand;
+import controller.commands.AddExamResultCommand;
 import controller.commands.AddStudentCommand;
 import controller.commands.AddStudentIntoDBCommand;
+import controller.commands.CheckExamDataCommand;
 import controller.commands.CheckStudentDataCommand;
 import controller.commands.Command;
 
@@ -40,6 +43,9 @@ public class RequestHelper {
         commands.put("addStudent", new AddStudentCommand());
         commands.put("checkStudentData", new CheckStudentDataCommand());
         commands.put("addStudentIntoDB", new AddStudentIntoDBCommand());
+        commands.put("addExamResult", new AddExamResultCommand());
+        commands.put("checkExamData", new CheckExamDataCommand());
+        commands.put("addExamIntoDB", new AddExamIntoDBCommand());
     }
 
     public Command getCommand(HttpServletRequest request) {

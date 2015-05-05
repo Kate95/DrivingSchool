@@ -48,9 +48,7 @@
                             <td>${group.formOfStudy.formOfStudy}</td>                            
                             <td><fmt:formatDate dateStyle="medium" type="date" value="${group.startDate}" /></td> 
                             <td><fmt:formatDate dateStyle="medium" type="date" value="${group.endDate}" /></td>
-                            <td>
-                                <input type="radio" name="groupID" value="${group.groupID}"/>
-                            </td>
+                            <td><input type="radio" name="groupID" value="${group.groupID}"/></td>
                         </tr>
                     </c:forEach>
                 </table>

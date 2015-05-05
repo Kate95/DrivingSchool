@@ -8,6 +8,7 @@ package dao;
 import dao.impl.AccountDAOImpl;
 import dao.impl.CarDAOImpl;
 import dao.impl.ExamDAOImpl;
+import dao.impl.ExamTypeDAOImpl;
 import dao.impl.FormOfStudyDAOImpl;
 import dao.impl.InstructorDAOImpl;
 import dao.impl.StudentDAOImpl;
@@ -26,6 +27,7 @@ public class DAOFactory {
     private static AccountDAO accountDAO = null;
     private static CarDAO carDAO = null;
     private static ExamDAO examDAO = null;
+    private static ExamTypeDAO examTypeDAO = null;
     private static DAOFactory instance = null;
 
     public static synchronized DAOFactory getInstance() {
@@ -82,5 +84,12 @@ public class DAOFactory {
             examDAO = new ExamDAOImpl();
         }
         return examDAO;
+    }
+    
+    public ExamTypeDAO getExamTypeDAO() {
+        if (examTypeDAO == null) {
+            examTypeDAO = new ExamTypeDAOImpl();
+        }
+        return examTypeDAO;
     }
 }

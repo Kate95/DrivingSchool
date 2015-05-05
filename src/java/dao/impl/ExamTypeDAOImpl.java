@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package dao.impl;
 
-import dao.FormOfStudyDAO;
+import dao.ExamTypeDAO;
 import java.util.ArrayList;
 import java.util.List;
-import logic.FormOfStudy;
+import logic.ExamType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -17,15 +18,15 @@ import util.HibernateUtil;
  *
  * @author Kate
  */
-public class FormOfStudyDAOImpl implements FormOfStudyDAO {
+public class ExamTypeDAOImpl implements ExamTypeDAO {
 
-    public void create(FormOfStudy form){
+    public void create(ExamType examType){
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            session.save(form);
+            session.save(examType);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -39,13 +40,13 @@ public class FormOfStudyDAOImpl implements FormOfStudyDAO {
         }
     }
 
-    public void update(FormOfStudy form){
+    public void update(ExamType examType){
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            session.update(form);
+            session.update(examType);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -59,12 +60,12 @@ public class FormOfStudyDAOImpl implements FormOfStudyDAO {
         }
     }
 
-    public FormOfStudy read(String id){
+    public ExamType read(String id){
         Session session = null;
-        FormOfStudy form = null;
+        ExamType examType = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            form = (FormOfStudy) session.get(FormOfStudy.class, id);
+            examType = (ExamType) session.get(ExamType.class, id);
         } catch (Exception e) {
             System.out.println("Ошибка I/O");
         } finally {
@@ -72,15 +73,15 @@ public class FormOfStudyDAOImpl implements FormOfStudyDAO {
                 session.close();
             }
         }
-        return form;
+        return examType;
     }
 
-    public List<FormOfStudy> getAll(){
+    public List<ExamType> getAll(){
         Session session = null;
-        List<FormOfStudy> forms = new ArrayList();
+        List<ExamType> examTypes = new ArrayList();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            forms = session.createCriteria(FormOfStudy.class).list();
+            examTypes = session.createCriteria(ExamType.class).list();
         } catch (Exception e) {
             System.out.println("Ошибка I/O");
         } finally {
@@ -88,7 +89,7 @@ public class FormOfStudyDAOImpl implements FormOfStudyDAO {
                 session.close();
             }
         }
-        return forms;
+        return examTypes;
     }
 
     public void delete(String id){
@@ -97,8 +98,8 @@ public class FormOfStudyDAOImpl implements FormOfStudyDAO {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            FormOfStudy form = (FormOfStudy) session.get(FormOfStudy.class, id);
-            session.delete(form);
+            ExamType examType = (ExamType) session.get(ExamType.class, id);
+            session.delete(examType);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

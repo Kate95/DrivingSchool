@@ -67,7 +67,7 @@ public class Exam implements Serializable {
         this.examNumber = examNumber;
     }
 
-    public void setStudentID(Student student) {
+    public void setStudent(Student student) {//было setStudentID()
         this.student = student;
     }
 
