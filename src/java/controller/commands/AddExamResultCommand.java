@@ -9,7 +9,6 @@ package controller.commands;
 import dao.DAOFactory;
 import dao.ExamTypeDAO;
 import dao.StudentDAO;
-import dao.StudyGroupDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import logic.Account;
 import logic.ExamType;
 import logic.Student;
-import logic.StudyGroup;
 
 /**
  *

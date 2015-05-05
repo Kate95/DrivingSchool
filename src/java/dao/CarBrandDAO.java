@@ -7,21 +7,20 @@
 package dao;
 
 import java.util.List;
-import logic.Exam;
+import logic.CarBrand;
 
 /**
  *
  * @author Kate
  */
-public interface ExamDAO {
-    public void create(Exam exam);
+public interface CarBrandDAO {
+    public void create(CarBrand carBrand);
 
-    public void update(Exam exam);
+    public void update(CarBrand carBrand);
 
-    public Exam read(Integer studentID, Integer examNumber);
+    public CarBrand read(String id);
 
     public List getAll();
 
-    public void delete(Integer studentID, Integer examNumber);
-    
+    public void delete(String id);
 }

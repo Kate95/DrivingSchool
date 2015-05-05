@@ -6,6 +6,7 @@
 package dao;
 
 import dao.impl.AccountDAOImpl;
+import dao.impl.CarBrandDAOImpl;
 import dao.impl.CarDAOImpl;
 import dao.impl.ExamDAOImpl;
 import dao.impl.ExamTypeDAOImpl;
@@ -28,6 +29,7 @@ public class DAOFactory {
     private static CarDAO carDAO = null;
     private static ExamDAO examDAO = null;
     private static ExamTypeDAO examTypeDAO = null;
+    private static CarBrandDAO carBrandDAO = null;
     private static DAOFactory instance = null;
 
     public static synchronized DAOFactory getInstance() {
@@ -91,5 +93,12 @@ public class DAOFactory {
             examTypeDAO = new ExamTypeDAOImpl();
         }
         return examTypeDAO;
+    }
+    
+    public CarBrandDAO getCarBrandDAO() {
+        if (carBrandDAO == null) {
+            carBrandDAO = new CarBrandDAOImpl();
+        }
+        return carBrandDAO;
     }
 }

@@ -6,12 +6,12 @@
 
 package dao.impl;
 
-import dao.ExamDAO;
+import dao.CarBrandDAO;
+import dao.ExamTypeDAO;
 import java.util.ArrayList;
 import java.util.List;
-
-import logic.Exam;
-import org.hibernate.Query;
+import logic.CarBrand;
+import logic.ExamType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -20,15 +20,15 @@ import util.HibernateUtil;
  *
  * @author Kate
  */
-public class ExamDAOImpl implements ExamDAO {
+public class CarBrandDAOImpl implements CarBrandDAO {
 
-    public void create(Exam exam) {
+    public void create(CarBrand carBrand){
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            session.save(exam);
+            session.save(carBrand);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -42,13 +42,13 @@ public class ExamDAOImpl implements ExamDAO {
         }
     }
 
-    public void update(Exam exam){
+    public void update(CarBrand carBrand){
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            session.update(exam);
+            session.update(carBrand);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -62,15 +62,12 @@ public class ExamDAOImpl implements ExamDAO {
         }
     }
 
-    public Exam read(Integer studentID, Integer examNumber){
+    public CarBrand read(String id){
         Session session = null;
-        Exam exam = null;
+        CarBrand carBrand = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.getNamedQuery("Exam.readByExamNumberAndStudentID");
-            query.setParameter("examNumber", examNumber);
-            query.setParameter("studentID", studentID);
-            exam =(Exam) query.uniqueResult();
+            carBrand = (CarBrand) session.get(CarBrand.class, id);
         } catch (Exception e) {
             System.out.println("Ошибка I/O");
         } finally {
@@ -78,15 +75,15 @@ public class ExamDAOImpl implements ExamDAO {
                 session.close();
             }
         }
-        return exam;
+        return carBrand;
     }
 
-    public List<Exam> getAll() {
+    public List<CarBrand> getAll(){
         Session session = null;
-        List<Exam> exams = new ArrayList();
+        List<CarBrand> carBrands = new ArrayList();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            exams = session.createCriteria(Exam.class).list();
+            carBrands = session.createCriteria(CarBrand.class).list();
         } catch (Exception e) {
             System.out.println("Ошибка I/O");
         } finally {
@@ -94,17 +91,17 @@ public class ExamDAOImpl implements ExamDAO {
                 session.close();
             }
         }
-        return exams;
+        return carBrands;
     }
 
-    public void delete(Integer studentID, Integer examNumber){
+    public void delete(String id){
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();            
-            Exam exam =read(studentID,examNumber);            
-            session.delete(exam);
+            tx = session.beginTransaction();
+            CarBrand carBrand = (CarBrand) session.get(CarBrand.class, id);
+            session.delete(carBrand);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
