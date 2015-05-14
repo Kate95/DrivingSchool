@@ -6,7 +6,6 @@
 package dao.impl;
 
 import dao.StudyGroupDAO;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import logic.StudyGroup;

@@ -7,7 +7,6 @@
 package controller.commands;
 
 import dao.DAOFactory;
-import dao.StudyGroupDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,31 +21,32 @@ import logic.StudyGroup;
  * @author Kate
  */
 public class AddStudentCommand implements Command {
-
-    private StudyGroupDAO dao;
-    private List<StudyGroup> groupList;
-    private String page;
     
     public AddStudentCommand(){        
-        dao = DAOFactory.getInstance().getStudyGroupDAO();
+       
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();  
-        groupList = dao.getAll();
-        hash.put("groupList", groupList);
-        page = "/add_student.jsp";        
+        List<StudyGroup> groupList = DAOFactory.getInstance().getStudyGroupDAO().getAll();
+        hash.put("groupList", groupList); 
+        hash.put("comment", null);
+        hash.put("student",null);
+        hash.put("birthDate",null);
         return hash;
     }
     
-    public ArrayList<String> getAttributeName() {
-        ArrayList<String> list = new ArrayList();   
+    public List<String> getAttributeName() {
+        List<String> list = new ArrayList();   
         list.add("groupList");
+        list.add("comment");
+        list.add("student");
+        list.add("birthDate");
         return list;
     }
     
     public String getResponsePage(){
-        return page;
+        return "/add_student.jsp";
     }
 }
 

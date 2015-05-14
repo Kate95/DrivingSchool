@@ -8,7 +8,6 @@ package dao;
 
 import java.util.List;
 import logic.Car;
-import logic.Instructor;
 
 /**
  *

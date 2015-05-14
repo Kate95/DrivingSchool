@@ -21,26 +21,52 @@
             </div>
             <div id="left">
                 <form action="Controller">
-                    <input class="button" type="button" value="Main" onclick="javascript:window.location='index.jsp'" /><br>
-                    <input class="button" type="submit" name="command" value="viewAllStudyForms" /><br>
-                    <input class="button" type="submit" name="command" value="viewStudyGroups" /><br>
-                    <input class="button" type="submit" name="command" value="viewInstructors" /><br>
-                    <input class="button" type="submit" name="command" value="viewCars" /><br>
-                    <input class="button" type="submit" name="command" value="viewStudents" /><br>
-                    <input class="button" type="submit" name="command" value="addStudent" />
+                    <c:if test="${empty client&&empty admin}">
+                        <a href="login.jsp" >Авторизоваться</a><br><hr>
+                    </c:if>
+                    <c:if test="${not empty client}">                        
+                        <c:out value="Здравствуйте, ${client.studentName}"/><br>
+                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                    </c:if>
+                    <c:if test="${not empty admin}">
+                        <c:out value="Здравствуйте, ${admin}"/><br>
+                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                    </c:if>
+                    <input type="hidden" name="client" value="${client}"/>
+                    <input type="hidden" name="admin" value="${admin}"/>
+                    <button class="button" type="button" value="Main" onclick="javascript:window.location='index.jsp'">Главная</button><br>
+                    <button class="button" type="submit" name="command" value="viewAllStudyForms">Формы обучения</button><br>
+                    <button class="button" type="submit" name="command" value="viewStudyGroups">Учебные группы</button><br>
+                    <button class="button" type="submit" name="command" value="viewInstructors">Инструкторы</button><br>
+                    <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
+                    <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
+                    <c:if test="${empty client&&empty admin}">
+                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                    </c:if>
+                    <c:if test="${not empty client}">
+                        <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
+                        <button class="button" type="submit" name="command" value="addPayment">Оплатить обучение</button>
+                    </c:if>
+                    <c:if test="${not empty admin}">                        
+                        <button class="button" type="submit" name="command" value="addExamResult">Добавить результаты зачета</button>
+                    </c:if>
                 </form>
             </div>	
             <div id="center"><br>
-                <a href="login.jsp" >Авторизоваться</a><br><hr>
-                <form action="Controller">                    
-                <p>Выберите группу:</p>
+                <c:if test="${not empty comment}">
+                    <c:out value="${comment}"/><br>
+                </c:if>
+                <form action="Controller">  
+                    <input type="hidden" name="client" value="${client}"/>
+                    <input type="hidden" name="admin" value="${admin}"/>
+                Выберите группу:<br>
                 <table cellpadding="5" >
                     <tr>         
                         <td>Номер группы</td>
                         <td>Форма обучения</td>                       
                         <td>Начало обучения</td>
                         <td>Окончание обучения</td>
-                        <td>выбор группы</td>
+                        <td>Выбор группы</td>
                     </tr>
                     <c:forEach items="${groupList}" var="group" varStatus="status">
                         <tr>                    
@@ -48,17 +74,31 @@
                             <td>${group.formOfStudy.formOfStudy}</td>                            
                             <td><fmt:formatDate dateStyle="medium" type="date" value="${group.startDate}" /></td> 
                             <td><fmt:formatDate dateStyle="medium" type="date" value="${group.endDate}" /></td>
-                            <td><input type="radio" name="groupID" value="${group.groupID}"/></td>
+                            <td><c:if test="${status.index == 0}">
+                                    <input type="radio" name="groupID" value="${group.groupID}" checked=""/>
+                                </c:if>
+                                <c:if test="${status.index != 0}">
+                                    <input type="radio" name="groupID" value="${group.groupID}"/>
+                                </c:if>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
-                <p>ФИО:<input type="text" name="studentName" value=""/></p>
-                <p>Дата рождения(yyyy-MM-dd):<input type="text" name="dateOfBirth" value=""/></p>
-                <p>Телефон:<input type="text" name="phoneNumber" value=""/></p>
-                <p>Адрес:<input type="text" name="address" value=""/></p>
-                <p>Логин:<input type="text" name="login" value=""/></p>
-                <p>Пароль:<input type="password" name="password" value=""/></p>
-                <p><input type="submit" name="command" value="checkStudentData"/></p>
+                <c:if test="${not empty comment}">
+                    ФИО:<br><input type="text" name="studentName" value="${student.studentName}"/><br>
+                    Дата рождения(yyyy-MM-dd):<br><input type="text" name="dateOfBirth" value="${birthDate}"/><br>
+                    Телефон:<br><input type="text" name="phoneNumber" value="${student.phoneNumber}"/><br>
+                    Адрес:<br><input type="text" name="address" value="${student.address}"/><br>
+                </c:if>
+                <c:if test="${empty comment}">
+                    ФИО:<br><input type="text" name="studentName" value=""/><br>
+                    Дата рождения(yyyy-MM-dd):<br><input type="text" name="dateOfBirth" value=""/><br>
+                    Телефон:<br><input type="text" name="phoneNumber" value=""/><br>
+                    Адрес:<br><input type="text" name="address" value=""/><br>
+                </c:if>                
+                Логин:<br><input type="text" name="login" value=""/><br>
+                Пароль:<br><input type="password" name="password" value=""/><br>
+                <p><button type="submit" name="command" value="checkStudentData">Подтвердить</button></p>
                 </form>
             </div>
             <div id="footer"><br>

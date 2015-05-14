@@ -7,8 +7,6 @@
 package controller.commands;
 
 import dao.DAOFactory;
-import dao.ExamTypeDAO;
-import dao.StudentDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,32 +23,23 @@ import logic.Student;
  * @author Kate
  */
 public class AddExamResultCommand implements Command {
-
-    private StudentDAO dao;
-    private ExamTypeDAO examTypeDao;
-    private List<Student> studentList;
-    private List<ExamType> examTypeList;
-    private String paymentList[];
-    private List<Account> accountList;
-    private String page;
     
-    public AddExamResultCommand(){        
-        dao = DAOFactory.getInstance().getStudentDAO();
-        examTypeDao = DAOFactory.getInstance().getExamTypeDAO();
+    public AddExamResultCommand(){ 
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();  
-        studentList = dao.getAll();
-        examTypeList = examTypeDao.getAll();
-        paymentList= new String[studentList.size()];
-        accountList = DAOFactory.getInstance().getAccountDAO().getAll();
-        for(int i=0;i<studentList.size();i++){
-            paymentList[i]="Не оплачено";            
-            for(int j=0;j<accountList.size();j++){
-                if(studentList.get(i).getStudentID()==accountList.get(j).getStudent().getStudentID()){
-                    int payment=studentList.get(i).getStudyGroup().getFormOfStudy().getCostOfEducation();
-                    int paid=accountList.get(j).getAmountOfMoney();
+        List<Student> studentList = DAOFactory.getInstance().getStudentDAO().getAll();
+        List<ExamType> examTypeList = DAOFactory.getInstance().getExamTypeDAO().getAll();
+        String[] paymentList= new String[studentList.size()];
+        List<Account> accountList = DAOFactory.getInstance().getAccountDAO().getAll();
+        int i=0;
+        for(Student student:studentList){
+            paymentList[i]="Не оплачено";
+            for(Account account:accountList){
+                if(student.getStudentID()==account.getStudent().getStudentID()){
+                    int payment=student.getStudyGroup().getFormOfStudy().getCostOfEducation();
+                    int paid=account.getAmountOfMoney();
                     if(payment<=paid){
                         paymentList[i]="Оплачено";
                     }
@@ -59,16 +48,16 @@ public class AddExamResultCommand implements Command {
                     }                    
                 }
             }
-        }
+            i++;
+        }        
         hash.put("studentList", studentList);
         hash.put("paymentList",paymentList);
-        hash.put("examTypeList",examTypeList);
-        page = "/add_exam_result.jsp";        
+        hash.put("examTypeList",examTypeList);      
         return hash;
     }
     
-    public ArrayList<String> getAttributeName() {
-        ArrayList<String> list = new ArrayList();   
+    public List<String> getAttributeName() {
+        List<String> list = new ArrayList();   
         list.add("studentList");
         list.add("paymentList");
         list.add("examTypeList");
@@ -76,7 +65,7 @@ public class AddExamResultCommand implements Command {
     }
     
     public String getResponsePage(){
-        return page;
+        return "/add_exam_result.jsp";
     }
 }
 

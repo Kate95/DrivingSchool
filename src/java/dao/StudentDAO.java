@@ -24,5 +24,4 @@ public interface StudentDAO {
 
     public void delete(Integer id);
     
-    public boolean checkLogin(String login, String password); 
 }

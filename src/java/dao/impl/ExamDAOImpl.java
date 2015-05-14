@@ -9,7 +9,6 @@ package dao.impl;
 import dao.ExamDAO;
 import java.util.ArrayList;
 import java.util.List;
-
 import logic.Exam;
 import org.hibernate.Query;
 import org.hibernate.Session;

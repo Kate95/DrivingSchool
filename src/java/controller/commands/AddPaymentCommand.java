@@ -14,37 +14,31 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.FormOfStudy;
+import logic.Student;
 
 /**
  *
  * @author Kate
  */
-public class ViewAllStudyFormsCommand implements Command {
-
-    public ViewAllStudyFormsCommand(){        
+public class AddPaymentCommand implements Command {
+    
+    public AddPaymentCommand(){ 
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        HashMap<String, Object> hash = new HashMap();    
-        List<FormOfStudy> formList = DAOFactory.getInstance().getFormOfStudyDAO().getAll();
-        if (formList.isEmpty()) {           
-            hash.put("comment", "В базе нет требуемых данных");            
-        } else {
-            hash.put("comment", null);            
-        }     
-        hash.put("formList", formList);
+        HashMap<String, Object> hash = new HashMap();  
+        List<Student> studentList = DAOFactory.getInstance().getStudentDAO().getAll();        
+        hash.put("studentList", studentList);   
         return hash;
     }
     
     public List<String> getAttributeName() {
-        List<String> list = new ArrayList();
-        list.add("formList");
-        list.add("comment");
+        List<String> list = new ArrayList();   
+        list.add("studentList");        
         return list;
     }
     
     public String getResponsePage(){
-        return "/study_forms_info.jsp";
+        return "/add_payment.jsp";
     }
 }

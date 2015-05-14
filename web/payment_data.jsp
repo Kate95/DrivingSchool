@@ -1,11 +1,12 @@
 <%-- 
-    Document   : index
-    Created on : 03.05.2015, 14:07:04
+    Document   : payment_data
+    Created on : 12.05.2015, 22:59:46
     Author     : Kate
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
     <head>       
@@ -19,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">                    
+                <form action="Controller">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -48,30 +49,25 @@
                     </c:if>
                     <c:if test="${not empty admin}">                        
                         <button class="button" type="submit" name="command" value="addExamResult">Добавить результаты зачета</button>
-                    </c:if>
+                    </c:if>            
                 </form>
             </div>	
             <div id="center"><br>                
-                <p>
-                    Обучение в автошколе «ВиртуозАвто» - это не только основательная подготовка<br>
-                    к сдаче теоретических и практических экзаменов в ГАИ с последующим получением<br>
-                    водительских прав, но и приобретение чувства уверенности на любой дороге
-                    в любых ситуациях.<br/>
-                    Адрес: <br/>
-                    Офис: г. Минск, ул.Стариновская,д. 31, подъезд 3, комн. № 11-H<br/>
-                    Учебные классы:<br/>
-                    ст.м "Уручье" (ул.Ложинская, 5)<br/>
-                    ст.м"Я.Коласа" (пр.Независимости,49)<br/>
-                    ст.м"Немига" (ул.Немига,3)<br/>
-                    Контакты:<br/>
-                    +375 44 5-524-524  (Velcom<br/>
-                    +375 29 709-97-90  (МТС<br/>
-                    E-mail: avtovirtuoz@mail.ru
-                </p>
+                <form action="Controller">
+                    <input type="hidden" name="client" value="${client}"/>
+                    <input type="hidden" name="admin" value="${admin}"/>    
+                    <p><c:out value="${comment}"/></p>
+                    <p><c:out value="ФИО слушателя: ${account.student.studentName}"/></p>                    
+                    <p><c:out value="Сумма, которая будет зачислена на счет: ${payment}"/></p>
+                    <input type="hidden" name="payment" value="${payment}"/>                 
+                    <input type="hidden" name="accountNumber" value="${account.accountNumber}"/>
+                    <p><button type="submit" name="command" value="addPaymentIntoDB">Оплатить</button></p>
+                </form>
             </div>
             <div id="footer"><br>
                 Автошкола "Виртуоз" E-mail:avtovirtuoz@mail.ru
             </div>
         </div>       
-        </body>
+    </body>
 </html>
+

@@ -7,7 +7,6 @@
 package controller.commands;
 
 import dao.DAOFactory;
-import dao.ExamDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,34 +21,30 @@ import logic.Exam;
  * @author Kate
  */
 public class ViewExamsCommand implements Command {
-    private ExamDAO dao;
-    private List<Exam> examList;
-    private String page;   
-    
-    public ViewExamsCommand(){
-        dao = DAOFactory.getInstance().getExamDAO();
+
+    public ViewExamsCommand(){        
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();          
-        examList = dao.getAll();
+        List<Exam> examList = DAOFactory.getInstance().getExamDAO().getAll();
         if (examList.isEmpty()) {
-            page = "/no_forms.jsp";
+            hash.put("comment", "В базе нет требуемых данных");
         } else {
-            page = "/exams_info.jsp";
-            hash.put("examList", examList);
-        }   
-        
+            hash.put("comment", null);
+        }
+        hash.put("examList", examList);
         return hash;
     }
     
-    public ArrayList<String> getAttributeName() {
-        ArrayList<String> list = new ArrayList();
+    public List<String> getAttributeName() {
+        List<String> list = new ArrayList();
         list.add("examList");
+        list.add("comment");
         return list;
     }
     
     public String getResponsePage(){
-        return page;
+        return "/exams_info.jsp";
     }
 }

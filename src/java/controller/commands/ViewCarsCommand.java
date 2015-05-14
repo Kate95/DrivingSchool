@@ -6,7 +6,6 @@
 
 package controller.commands;
 
-import dao.CarDAO;
 import dao.DAOFactory;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,35 +21,31 @@ import logic.Car;
  * @author Kate
  */
 public class ViewCarsCommand implements Command {
-    private CarDAO dao;
-    private List<Car> carList;
-    private String page;   
-    
-    public ViewCarsCommand(){
-        dao = DAOFactory.getInstance().getCarDAO();
+
+    public ViewCarsCommand(){        
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        HashMap<String, Object> hash = new HashMap();          
-        carList = dao.getAll();
-        if (carList.isEmpty()) {
-            page = "/no_forms.jsp";
+        HashMap<String, Object> hash = new HashMap();
+        List<Car> carList = DAOFactory.getInstance().getCarDAO().getAll();
+        if (carList.isEmpty()) {           
+            hash.put("comment", "В базе нет требуемых данных");
         } else {
-            page = "/cars_info.jsp";
-            hash.put("carList", carList);
-        }   
-        
+            hash.put("comment", null);
+        }
+        hash.put("carList", carList);
         return hash;
     }
     
-    public ArrayList<String> getAttributeName() {
-        ArrayList<String> list = new ArrayList();
+    public List<String> getAttributeName() {
+        List<String> list = new ArrayList();
         list.add("carList");
+        list.add("comment");
         return list;
     }
     
     public String getResponsePage(){
-        return page;
+        return "/cars_info.jsp";
     }
 }
 

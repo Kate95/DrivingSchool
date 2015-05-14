@@ -14,31 +14,26 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.Exam;
-import logic.ExamType;
-import logic.Student;
+import logic.Account;
 
 /**
  *
  * @author Kate
  */
-public class AddExamIntoDBCommand implements Command {  
+public class AddPaymentIntoDBCommand implements Command {
     
-    public AddExamIntoDBCommand(){   
+    public AddPaymentIntoDBCommand(){   
+        
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HashMap<String, Object> hash = new HashMap();
-        Exam exam = new Exam();
-        Integer studentID = Integer.parseInt(request.getParameter("studentID"));
-        Student student = DAOFactory.getInstance().getStudentDAO().read(studentID);
-        exam.setStudent(student);
-        ExamType examType = DAOFactory.getInstance().getExamTypeDAO().read(request.getParameter("examType"));
-        exam.setExamType(examType);
-        exam.setValue(Integer.parseInt(request.getParameter("value")));
-        exam.setExamNumber(Integer.parseInt(request.getParameter("examNumber")));
-        DAOFactory.getInstance().getExamDAO().create(exam);
+        HashMap<String, Object> hash = new HashMap();        
+        int payment = Integer.parseInt(request.getParameter("payment"));
+        Account account = DAOFactory.getInstance().getAccountDAO().read(Integer.parseInt(request.getParameter("accountNumber")));
+        int newAmountOfMoney = account.getAmountOfMoney()+payment;
+        account.setAmountOfMoney(newAmountOfMoney);
+        DAOFactory.getInstance().getAccountDAO().update(account);        
         return hash;
     }
     
@@ -51,4 +46,3 @@ public class AddExamIntoDBCommand implements Command {
         return "/index.jsp";
     }
 }
-

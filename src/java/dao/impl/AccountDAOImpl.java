@@ -18,7 +18,7 @@ import util.HibernateUtil;
  *
  * @author Kate
  */
-public class AccountDAOImpl  implements AccountDAO {
+public class AccountDAOImpl  implements AccountDAO {    
 
     public void create(Account account) {
         Session session = null;
@@ -80,7 +80,7 @@ public class AccountDAOImpl  implements AccountDAO {
         Session session = null;
         List<Account> accounts = new ArrayList();
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();            
             accounts = session.createCriteria(Account.class).list();
         } catch (Exception e) {
             System.out.println("Ошибка I/O");

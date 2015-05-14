@@ -7,12 +7,17 @@ package controller;
 
 import controller.commands.AddExamIntoDBCommand;
 import controller.commands.AddExamResultCommand;
+import controller.commands.AddPaymentCommand;
+import controller.commands.AddPaymentIntoDBCommand;
 import controller.commands.AddStudentCommand;
 import controller.commands.AddStudentIntoDBCommand;
 import controller.commands.CheckExamDataCommand;
+import controller.commands.CheckPaymentDataCommand;
 import controller.commands.CheckStudentDataCommand;
 import controller.commands.Command;
-
+import controller.commands.LoginCommand;
+import controller.commands.LogoutCommand;
+import controller.commands.NoCommand;
 import controller.commands.ViewAllStudyFormsCommand;
 import controller.commands.ViewCarsCommand;
 import controller.commands.ViewExamsCommand;
@@ -30,8 +35,7 @@ public class RequestHelper {
 
     private static RequestHelper instance = null;
 
-    HashMap<String, Command> commands
-            = new HashMap<String, Command>();
+    HashMap<String, Command> commands = new HashMap();
 
     private RequestHelper() {
         commands.put("viewAllStudyForms", new ViewAllStudyFormsCommand());
@@ -46,10 +50,19 @@ public class RequestHelper {
         commands.put("addExamResult", new AddExamResultCommand());
         commands.put("checkExamData", new CheckExamDataCommand());
         commands.put("addExamIntoDB", new AddExamIntoDBCommand());
+        commands.put("login", new LoginCommand());
+        commands.put("logout", new LogoutCommand());
+        commands.put("addPayment", new AddPaymentCommand());
+        commands.put("checkPaymentData", new CheckPaymentDataCommand());
+        commands.put("addPaymentIntoDB", new AddPaymentIntoDBCommand());
+        commands.put("noCommand", new NoCommand());
     }
 
     public Command getCommand(HttpServletRequest request) {
         String action = request.getParameter("command");
+        if (action == null) {
+            action = "noCommand";
+        }
         Command command = commands.get(action);
         return command;
     }

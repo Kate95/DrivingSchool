@@ -7,7 +7,6 @@
 package controller.commands;
 
 import dao.DAOFactory;
-import dao.InstructorDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,37 +20,32 @@ import logic.Instructor;
  *
  * @author Kate
  */
-public class ViewInstructorsCommand  implements Command {
-    private InstructorDAO dao;
-    private List<Instructor> instructorList;
-    private String page;   
+public class ViewInstructorsCommand  implements Command {  
     
-    public ViewInstructorsCommand(){
-        dao = DAOFactory.getInstance().getInstructorDAO();
+    public ViewInstructorsCommand(){        
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        HashMap<String, Object> hash = new HashMap();
-        System.out.println("ok1");
-        instructorList = dao.getAll();
+        HashMap<String, Object> hash = new HashMap();        
+        List<Instructor> instructorList = DAOFactory.getInstance().getInstructorDAO().getAll();
         if (instructorList.isEmpty()) {
-            page = "/no_forms.jsp";
+            hash.put("comment", "В базе нет требуемых данных");
         } else {
-            page = "/instructors_info.jsp";
-            hash.put("instructorList", instructorList);
-        }       
-        System.out.println("ok");
+            hash.put("comment", null);
+        }    
+        hash.put("instructorList", instructorList);
         return hash;
     }
     
-    public ArrayList<String> getAttributeName() {
-        ArrayList<String> list = new ArrayList();
+    public List<String> getAttributeName() {
+        List<String> list = new ArrayList();
         list.add("instructorList");
+        list.add("comment");
         return list;
     }
     
     public String getResponsePage(){
-        return page;
+        return "/instructors_info.jsp";
     }
 }
 

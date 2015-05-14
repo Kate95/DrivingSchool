@@ -7,8 +7,8 @@ package controller;
 
 import controller.commands.Command;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,10 +39,10 @@ public class Controller extends HttpServlet implements javax.servlet.Servlet{
 
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        //открытие нового сеанса(сессии)
+        
         HttpSession session = request.getSession(true);
         HashMap<String, Object> hash;
-        ArrayList<String>list;
+        List<String> list;
         Command command = requestHelper.getCommand(request);
         hash = command.execute(request, response);
         list = command.getAttributeName();

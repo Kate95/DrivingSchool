@@ -7,11 +7,9 @@
 package dao.impl;
 
 import dao.CarBrandDAO;
-import dao.ExamTypeDAO;
 import java.util.ArrayList;
 import java.util.List;
 import logic.CarBrand;
-import logic.ExamType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;

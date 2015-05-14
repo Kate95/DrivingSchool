@@ -6,7 +6,6 @@
 package dao.impl;
 
 import dao.StudentDAO;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import logic.Student;
@@ -112,10 +111,4 @@ public class StudentDAOImpl implements StudentDAO {
             }
         }
     }
-    
-    public boolean checkLogin(String login, String password) {
-        //
-        return true;
-    }
-
 }

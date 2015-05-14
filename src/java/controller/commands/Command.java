@@ -6,8 +6,8 @@
 package controller.commands;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,5 +20,5 @@ public interface Command {
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException;
     public String getResponsePage();
-    public ArrayList<String> getAttributeName();
+    public List<String> getAttributeName();
 }
