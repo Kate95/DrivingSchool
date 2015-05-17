@@ -8,23 +8,40 @@ and open the template in the editor.
     Author     : Kate
 */
 body{
-    background-color:#FFFFF0;
+    background-color:#D1EEEE;
 }
 
 div{
-    border: #DCDCDC 1px solid;
+    border: #27408B 1px solid;
     margin:0;
     padding:0;
     font-family:Georgia;
     font-weight:bold;
-    color:#708090
+    color:#000080
 }
 
-#header{
+#header{   
     text-align:center;
     clear:both;
     width:100%;
     height:50px;
+}
+
+.head_img{
+    position: absolute;
+    left: 70px;
+    top: 12px;
+    width: 150px;
+    height: 48px;
+     
+}
+
+.main_img{
+    position: absolute;
+    right: 40px;
+    bottom: 100px;
+    width: 400px;
+    height: 150px;        
 }
 
 #left{
@@ -55,46 +72,61 @@ div{
 
 a{   
     text-decoration: none;
-    color: #444;
+    color: #000080;
 }
 
 a:hover{
     text-decoration: none;
-    color: #708090;
+    color: #7EC0EE;
 }
 
 .button{    
-    color: #444;
+    color: #000080;
     height: 50px;
     width: 200px;
-    font: bold 16px arial;
-    background: #FDF5E6;
-    border: #DCDCDC 1px solid; 
+    font: bold 16px Georgia;
+    background: #6495ED;
+    border: #D1EEEE 1px solid; 
     border-radius: 3px;
     padding: 8px 12px;
     text-decoration: none;    
 }
 
+.button:hover{
+    background: #A4D3EE;
+    color: #444;
+}
+
 .a_button{
     border: 0;
-    background-color: #FFFFF0;
+    background-color: #D1EEEE;
     text-decoration: underline;
-    color: #708090;
+    color: #000080;
     font: bold 16px Georgia;
 }
 
 .a_button:hover{
     border: 0;
-    background-color: #FFFFF0;
+    background-color: #D1EEEE;
     text-decoration: underline;
-    color: #444;
+    color: #7EC0EE;
     font: bold 16px Georgia;
 }
 
 table{    
-    border: #DCDCDC 1px solid; 
+    border: #27408B 2px solid; 
     border-collapse: separate;   
-    text-align: center;
+    text-align: center;  
+    background-color: #C6E2FF;
+    width: 90%;
+}
+tr:first-child td{
+    background-color: #6495ED;
+    color: #000080;
+}
+td{
+    padding:5px;
+    border: #27408B 1px solid; 
 }
 
 

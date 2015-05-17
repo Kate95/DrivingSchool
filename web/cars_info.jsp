@@ -16,6 +16,7 @@
     <body>
         <div id="maket">
             <div id="header">
+                <img src="style/virtuoz.jpg" class="head_img"/>
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">

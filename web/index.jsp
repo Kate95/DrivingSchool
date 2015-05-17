@@ -16,6 +16,7 @@
     <body>
         <div id="maket">
             <div id="header">
+                <img src="style/virtuoz.jpg" class="head_img"/>
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
@@ -70,6 +71,7 @@
                     +375 29 709-97-90  (МТС)<br/>
                     E-mail: avtovirtuoz@mail.ru
                 </p>
+                <img src="style/automobile.png" class="main_img"/>
             </div>
             <div id="footer"><br>
                 Автошкола "Виртуоз" E-mail:avtovirtuoz@mail.ru
