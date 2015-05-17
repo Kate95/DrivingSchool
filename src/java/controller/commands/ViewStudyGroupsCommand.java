@@ -40,12 +40,7 @@ public class ViewStudyGroupsCommand implements Command {
                 }
             }
             i++;
-        }        
-        if (groupList.isEmpty()) {
-            hash.put("comment", "В базе нет требуемых данных");
-        } else {
-            hash.put("comment", null);
-        }    
+        }                
         hash.put("groupList", groupList);
         hash.put("studNumList",studNumList);
         return hash;
@@ -54,8 +49,7 @@ public class ViewStudyGroupsCommand implements Command {
     public List<String> getAttributeName() {
         List<String> list = new ArrayList();
         list.add("groupList");
-        list.add("studNumList");
-        list.add("comment");
+        list.add("studNumList");        
         return list;
     }
     

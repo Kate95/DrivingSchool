@@ -19,7 +19,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -40,7 +40,7 @@
                     <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
                     <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
                     <c:if test="${empty client&&empty admin}">
-                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                        <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
                     </c:if>
                     <c:if test="${not empty client}">
                         <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
@@ -51,27 +51,27 @@
                     </c:if>
                 </form>
             </div>	
-            <div id="center"><br>
-                <c:if test="${not empty comment}">
-                    <c:out value="${comment}"/>
+            <div id="center"><br>             
+                <c:if test="${empty formList}">
+                    <p>В базе нет требуемых данных или не был отправлен запрос к базе.</p>
                 </c:if>
-                <c:if test="${empty comment}">
-                <table cellpadding="5" >
-                    <tr>                
-                        <td>Форма обучения</td>
-                        <td>Стоимость обучения</td>
-                        <td>Часы по теории</td>
-                        <td>Часы по вождению</td>                
-                    </tr>
-                    <c:forEach items="${formList}" var="form">
-                        <tr>                    
-                            <td>${form.formOfStudy}</td>
-                            <td>${form.costOfEducation}</td>
-                            <td>${form.hoursForTheory}</td>
-                            <td>${form.hoursForDriving}</td>                    
+                <c:if test="${not empty formList}">
+                    <table cellpadding="5" >
+                        <tr>                
+                            <td>Форма обучения</td>
+                            <td>Стоимость обучения</td>
+                            <td>Часы по теории</td>
+                            <td>Часы по вождению</td>                
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:forEach items="${formList}" var="form">
+                            <tr>                    
+                                <td>${form.formOfStudy}</td>
+                                <td>${form.costOfEducation}</td>
+                                <td>${form.hoursForTheory}</td>
+                                <td>${form.hoursForDriving}</td>                    
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </c:if>
             </div>
             <div id="footer"><br>

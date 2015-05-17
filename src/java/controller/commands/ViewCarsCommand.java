@@ -27,12 +27,7 @@ public class ViewCarsCommand implements Command {
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();
-        List<Car> carList = DAOFactory.getInstance().getCarDAO().getAll();
-        if (carList.isEmpty()) {           
-            hash.put("comment", "В базе нет требуемых данных");
-        } else {
-            hash.put("comment", null);
-        }
+        List<Car> carList = DAOFactory.getInstance().getCarDAO().getAll();        
         hash.put("carList", carList);
         return hash;
     }
@@ -40,7 +35,6 @@ public class ViewCarsCommand implements Command {
     public List<String> getAttributeName() {
         List<String> list = new ArrayList();
         list.add("carList");
-        list.add("comment");
         return list;
     }
     

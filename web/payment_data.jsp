@@ -20,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -41,7 +41,7 @@
                     <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
                     <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
                     <c:if test="${empty client&&empty admin}">
-                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                        <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
                     </c:if>
                     <c:if test="${not empty client}">
                         <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
@@ -52,17 +52,27 @@
                     </c:if>            
                 </form>
             </div>	
-            <div id="center"><br>                
-                <form action="Controller">
-                    <input type="hidden" name="client" value="${client}"/>
-                    <input type="hidden" name="admin" value="${admin}"/>    
-                    <p><c:out value="${comment}"/></p>
-                    <p><c:out value="ФИО слушателя: ${account.student.studentName}"/></p>                    
-                    <p><c:out value="Сумма, которая будет зачислена на счет: ${payment}"/></p>
-                    <input type="hidden" name="payment" value="${payment}"/>                 
-                    <input type="hidden" name="accountNumber" value="${account.accountNumber}"/>
-                    <p><button type="submit" name="command" value="addPaymentIntoDB">Оплатить</button></p>
-                </form>
+            <div id="center"><br> 
+                <c:if test="${empty client}">
+                    <p>У вас нет прав выполнять данное действие.</p>
+                </c:if>
+                <c:if test="${not empty client}">
+                    <c:if test="${empty account || empty payment}">
+                        <p>Вы зашли на страницу, не введя предварительно необходимые данные об оплате.</p>
+                    </c:if>
+                    <c:if test="${not empty account && not empty payment}">
+                        <form action="Controller" method="post">
+                            <input type="hidden" name="client" value="${client}"/>
+                            <input type="hidden" name="admin" value="${admin}"/>    
+                            <p><c:out value="${comment}"/></p>
+                            <p><c:out value="ФИО слушателя: ${account.student.studentName}"/></p>                    
+                            <p><c:out value="Сумма, которая будет зачислена на счет: ${payment}"/></p>
+                            <input type="hidden" name="payment" value="${payment}"/>                 
+                            <input type="hidden" name="accountNumber" value="${account.accountNumber}"/>
+                            <p><button type="submit" name="command" value="addPaymentIntoDB">Оплатить</button></p>
+                        </form>
+                    </c:if>
+                </c:if>
             </div>
             <div id="footer"><br>
                 Автошкола "Виртуоз" E-mail:avtovirtuoz@mail.ru

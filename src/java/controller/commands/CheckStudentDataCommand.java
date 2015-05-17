@@ -50,11 +50,13 @@ public class CheckStudentDataCommand implements Command {
         student.setPassword(request.getParameter("password"));
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
-        try {
-            date = format.parse(request.getParameter("dateOfBirth"));
-        } catch (ParseException ex) {
-            Logger.getLogger(CheckStudentDataCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (!request.getParameter("dateOfBirth").equals("")) {
+            try {
+                date = format.parse(request.getParameter("dateOfBirth"));
+            } catch (ParseException ex) {
+                Logger.getLogger(CheckStudentDataCommand.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }      
         student.setDateOfBirth(date);
         int fl=0;
         for(Student st:students){

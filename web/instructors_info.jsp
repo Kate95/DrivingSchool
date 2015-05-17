@@ -20,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -53,24 +53,24 @@
                 </form>
             </div>	
             <div id="center"><br>   
-                <c:if test="${not empty comment}">
-                    <c:out value="${comment}"/>
+                <c:if test="${empty instructorList}">
+                    <p>В базе нет требуемых данных или не был отправлен запрос к базе.</p>
                 </c:if>
-                <c:if test="${empty comment}">
-                <table cellpadding="5" >
-                    <tr>                
-                        <td>ФИО</td>
-                        <td>Дата рождения</td>
-                        <td>Телефон</td>                                   
-                    </tr>
-                    <c:forEach items="${instructorList}" var="instructor">
-                        <tr>                    
-                            <td>${instructor.instructorName}</td>
-                            <td><fmt:formatDate dateStyle="medium" type="date" value="${instructor.dateOfBirth}" /></td>
-                            <td>${instructor.phoneNumber}</td>                                             
+                <c:if test="${not empty instructorList}">
+                    <table cellpadding="5" >
+                        <tr>                
+                            <td>ФИО</td>
+                            <td>Дата рождения</td>
+                            <td>Телефон</td>                                   
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:forEach items="${instructorList}" var="instructor">
+                            <tr>                    
+                                <td>${instructor.instructorName}</td>
+                                <td><fmt:formatDate dateStyle="medium" type="date" value="${instructor.dateOfBirth}" /></td>
+                                <td>${instructor.phoneNumber}</td>                                             
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </c:if>
             </div>
             <div id="footer"><br>

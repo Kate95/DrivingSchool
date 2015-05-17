@@ -27,12 +27,7 @@ public class ViewAllStudyFormsCommand implements Command {
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();    
-        List<FormOfStudy> formList = DAOFactory.getInstance().getFormOfStudyDAO().getAll();
-        if (formList.isEmpty()) {           
-            hash.put("comment", "В базе нет требуемых данных");            
-        } else {
-            hash.put("comment", null);            
-        }     
+        List<FormOfStudy> formList = DAOFactory.getInstance().getFormOfStudyDAO().getAll();  
         hash.put("formList", formList);
         return hash;
     }
@@ -40,7 +35,6 @@ public class ViewAllStudyFormsCommand implements Command {
     public List<String> getAttributeName() {
         List<String> list = new ArrayList();
         list.add("formList");
-        list.add("comment");
         return list;
     }
     

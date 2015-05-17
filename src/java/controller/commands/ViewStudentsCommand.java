@@ -47,12 +47,7 @@ public class ViewStudentsCommand implements Command {
                 }
             }
             i++;
-        }        
-        if (studentList.isEmpty()) {
-            hash.put("comment", "В базе нет требуемых данных");
-        } else {
-            hash.put("comment", null);
-        }       
+        }         
         hash.put("studentList", studentList);
         hash.put("paymentList", paymentList);
         return hash;
@@ -61,8 +56,7 @@ public class ViewStudentsCommand implements Command {
     public List<String> getAttributeName() {
         List<String> list = new ArrayList();
         list.add("studentList");
-        list.add("paymentList");
-        list.add("comment");
+        list.add("paymentList");        
         return list;
     }
     

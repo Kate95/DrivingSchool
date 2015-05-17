@@ -19,17 +19,19 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">                    
+                <form action="Controller" method="post">                    
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
                     <c:if test="${not empty client}">                        
                         <c:out value="Здравствуйте, ${client.studentName}"/><br>
-                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                        <%--<a href="Controller?command=logout" >Выйти</a><br><hr>--%>
+                        <button class="a_button" type="submit" name="command" value="logout">Выйти</button><br><hr>
                     </c:if>
                     <c:if test="${not empty admin}">
                         <c:out value="Здравствуйте, ${admin}"/><br>
-                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                        <button class="a_button" type="submit" name="command" value="logout">Выйти</button><br><hr>
+                        <%--<a href="Controller?command=logout" >Выйти</a><br><hr>--%>
                     </c:if>
                     <input type="hidden" name="client" value="${client}"/>
                     <input type="hidden" name="admin" value="${admin}"/>
@@ -64,8 +66,8 @@
                     ст.м"Я.Коласа" (пр.Независимости,49)<br/>
                     ст.м"Немига" (ул.Немига,3)<br/>
                     Контакты:<br/>
-                    +375 44 5-524-524  (Velcom<br/>
-                    +375 29 709-97-90  (МТС<br/>
+                    +375 44 5-524-524  (Velcom)<br/>
+                    +375 29 709-97-90  (МТС)<br/>
                     E-mail: avtovirtuoz@mail.ru
                 </p>
             </div>

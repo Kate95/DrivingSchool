@@ -31,9 +31,11 @@ public class AddPaymentIntoDBCommand implements Command {
         HashMap<String, Object> hash = new HashMap();        
         int payment = Integer.parseInt(request.getParameter("payment"));
         Account account = DAOFactory.getInstance().getAccountDAO().read(Integer.parseInt(request.getParameter("accountNumber")));
-        int newAmountOfMoney = account.getAmountOfMoney()+payment;
-        account.setAmountOfMoney(newAmountOfMoney);
-        DAOFactory.getInstance().getAccountDAO().update(account);        
+        int newAmountOfMoney = account.getAmountOfMoney() + payment;
+        if (account.getStudent().getStudyGroup().getFormOfStudy().getCostOfEducation() > account.getAmountOfMoney()) {
+            account.setAmountOfMoney(newAmountOfMoney);
+            DAOFactory.getInstance().getAccountDAO().update(account);
+        }         
         return hash;
     }
     

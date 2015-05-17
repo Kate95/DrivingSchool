@@ -55,7 +55,15 @@ public class AddStudentIntoDBCommand implements Command {
             Logger.getLogger(CheckStudentDataCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
         student.setDateOfBirth(date);
-        DAOFactory.getInstance().getStudentDAO().create(student);
+        boolean fl = true;
+        for (Student st : students) {
+            if (student.getLogin().equals(st.getLogin()) || student.getPassword().equals(st.getPassword())) {
+                fl = false;
+            }
+        }
+        if (fl) {
+            DAOFactory.getInstance().getStudentDAO().create(student);
+        }
         return hash;
     }
 

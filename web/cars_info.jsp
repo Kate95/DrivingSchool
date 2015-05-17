@@ -19,7 +19,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -52,24 +52,24 @@
                 </form>
             </div>	
             <div id="center"><br> 
-                <c:if test="${not empty comment}">
-                    <c:out value="${comment}"/>
+                <c:if test="${empty carList}">
+                    <p>В базе нет требуемых данных или не был отправлен запрос к базе.</p>
                 </c:if>
-                <c:if test="${empty comment}">
-                <table cellpadding="5" >
-                    <tr>                
-                        <td>Марка</td>
-                        <td>Год производства</td>
-                        <td>Ответственный инструктор</td>                                   
-                    </tr>
-                    <c:forEach items="${carList}" var="car">
-                        <tr>                    
-                            <td>${car.carBrand.carBrand}</td>
-                            <td>${car.yearOfManufacture}</td>
-                            <td>${car.instructor.instructorName}</td>                                             
+                <c:if test="${not empty carList}">
+                    <table cellpadding="5" >
+                        <tr>                
+                            <td>Марка</td>
+                            <td>Год производства</td>
+                            <td>Ответственный инструктор</td>                                   
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:forEach items="${carList}" var="car">
+                            <tr>                    
+                                <td>${car.carBrand.carBrand}</td>
+                                <td>${car.yearOfManufacture}</td>
+                                <td>${car.instructor.instructorName}</td>                                             
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </c:if>
             </div>
             <div id="footer"><br>

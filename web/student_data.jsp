@@ -20,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -41,7 +41,7 @@
                     <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
                     <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
                     <c:if test="${empty client&&empty admin}">
-                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                        <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
                     </c:if>
                     <c:if test="${not empty client}">
                         <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
@@ -52,40 +52,50 @@
                     </c:if>
                 </form>
             </div>	
-            <div id="center"><br>                
-                <form action="Controller">
-                    <input type="hidden" name="client" value="${client}"/>
-                    <input type="hidden" name="admin" value="${admin}"/>
-                <p>Группа:</p>
-                <table cellpadding="5" >
-                    <tr>         
-                        <td>Номер группы</td>
-                        <td>Форма обучения</td>                        
-                        <td>Начало обучения</td>
-                        <td>Окончание обучения</td>                        
-                    </tr>                    
-                        <tr>                    
-                            <td>${student.studyGroup.groupNumber}</td>
-                            <td>${student.studyGroup.formOfStudy.formOfStudy}</td>                            
-                            <td><fmt:formatDate dateStyle="medium" type="date" value="${student.studyGroup.startDate}" /></td> 
-                            <td><fmt:formatDate dateStyle="medium" type="date" value="${student.studyGroup.endDate}" /></td>                            
-                        </tr>                  
-                </table>
-                <p><c:out value="ФИО: ${student.studentName}"/></p>
-                <input type="hidden" name="studentName" value="${student.studentName}"/>              
-                <p>Дата рождения: <fmt:formatDate dateStyle="medium" type="date" value="${student.dateOfBirth}" /></p>
-                <input type="hidden" name="dateOfBirth" value="${student.dateOfBirth}"/>
-                <p><c:out value="Телефон: ${student.phoneNumber}"/></p>
-                <input type="hidden" name="phoneNumber" value="${student.phoneNumber}"/>
-                <p><c:out value="Адрес: ${student.address}"/></p>
-                <input type="hidden" name="address" value="${student.address}"/>
-                <p><c:out value="Логин: ${student.login}"/></p>
-                <input type="hidden" name="login" value="${student.address}"/>
-                <p><c:out value="Пароль: ${student.password}"/></p>
-                <input type="hidden" name="password" value="${student.password}"/>
-                <input type="hidden" name="groupID" value="${student.studyGroup.groupID}"/>
-                <p><button type="submit" name="command" value="addStudentIntoDB">Записаться</button></p>
-                </form>
+            <div id="center"><br>  
+                <c:if test="${not empty client || not empty admin}">
+                    <p>Вы не имеете прав выполнять данное действие.</p>
+                </c:if>
+                <c:if test="${empty client && empty admin}">
+                    <c:if test="${empty student}">
+                        <p>Вы зашли на страницу, не введя предварительно необходимые данные об студенте.</p>
+                    </c:if>
+                    <c:if test="${not empty student}">
+                        <form action="Controller" method="post">
+                            <input type="hidden" name="client" value="${client}"/>
+                            <input type="hidden" name="admin" value="${admin}"/>
+                            <p>Группа:</p>
+                            <table cellpadding="5" >
+                                <tr>         
+                                    <td>Номер группы</td>
+                                    <td>Форма обучения</td>                        
+                                    <td>Начало обучения</td>
+                                    <td>Окончание обучения</td>                        
+                                </tr>                    
+                                <tr>                    
+                                    <td>${student.studyGroup.groupNumber}</td>
+                                    <td>${student.studyGroup.formOfStudy.formOfStudy}</td>                            
+                                    <td><fmt:formatDate dateStyle="medium" type="date" value="${student.studyGroup.startDate}" /></td> 
+                                    <td><fmt:formatDate dateStyle="medium" type="date" value="${student.studyGroup.endDate}" /></td>                            
+                                </tr>                  
+                            </table>
+                            <p><c:out value="ФИО: ${student.studentName}"/></p>
+                            <input type="hidden" name="studentName" value="${student.studentName}"/>              
+                            <p>Дата рождения: <fmt:formatDate dateStyle="medium" type="date" value="${student.dateOfBirth}" /></p>
+                            <input type="hidden" name="dateOfBirth" value="${student.dateOfBirth}"/>
+                            <p><c:out value="Телефон: ${student.phoneNumber}"/></p>
+                            <input type="hidden" name="phoneNumber" value="${student.phoneNumber}"/>
+                            <p><c:out value="Адрес: ${student.address}"/></p>
+                            <input type="hidden" name="address" value="${student.address}"/>
+                            <p><c:out value="Логин: ${student.login}"/></p>
+                            <input type="hidden" name="login" value="${student.address}"/>
+                            <p><c:out value="Пароль: ${student.password}"/></p>
+                            <input type="hidden" name="password" value="${student.password}"/>
+                            <input type="hidden" name="groupID" value="${student.studyGroup.groupID}"/>
+                            <p><button type="submit" name="command" value="addStudentIntoDB">Записаться</button></p>
+                        </form>
+                    </c:if>
+                </c:if>
             </div>
             <div id="footer"><br>
                 Автошкола "Виртуоз" E-mail:avtovirtuoz@mail.ru

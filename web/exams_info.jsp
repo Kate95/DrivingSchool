@@ -19,7 +19,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -40,7 +40,7 @@
                     <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
                     <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
                     <c:if test="${empty client&&empty admin}">
-                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                        <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
                     </c:if>
                     <c:if test="${not empty client}">
                         <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
@@ -52,24 +52,29 @@
                 </form>
             </div>	
             <div id="center"><br>  
-                <c:if test="${not empty comment}">
-                    <c:out value="${comment}"/>
+                <c:if test="${empty client}">
+                    <p>У вас нет прав просматривать эти данные.</p>
                 </c:if>
-                <c:if test="${empty comment}">
-                <table cellpadding="5" >
-                    <tr>                
-                        <td>Номер</td>
-                        <td>Тип</td>
-                        <td>Оценка</td>                                   
-                    </tr>
-                    <c:forEach items="${examList}" var="exam">
-                        <tr>                    
-                            <td>${exam.examNumber}</td>
-                            <td>${exam.examType.examType}</td>
-                            <td>${exam.value}</td>                                             
-                        </tr>
-                    </c:forEach>
-                </table>
+                <c:if test="${not empty client}">
+                    <c:if test="${empty examList}">
+                        <p>В базе нет требуемых данных или не был отправлен запрос к базе.</p>
+                    </c:if>
+                    <c:if test="${not empty examList}">
+                        <table cellpadding="5" >
+                            <tr>                
+                                <td>Номер</td>
+                                <td>Тип</td>
+                                <td>Оценка</td>                                   
+                            </tr>
+                            <c:forEach items="${examList}" var="exam">
+                                <tr>                    
+                                    <td>${exam.examNumber}</td>
+                                    <td>${exam.examType.examType}</td>
+                                    <td>${exam.value}</td>                                             
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
                 </c:if>
             </div>
             <div id="footer"><br>

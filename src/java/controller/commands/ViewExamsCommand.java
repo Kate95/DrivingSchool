@@ -28,11 +28,6 @@ public class ViewExamsCommand implements Command {
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();          
         List<Exam> examList = DAOFactory.getInstance().getExamDAO().getAll();
-        if (examList.isEmpty()) {
-            hash.put("comment", "В базе нет требуемых данных");
-        } else {
-            hash.put("comment", null);
-        }
         hash.put("examList", examList);
         return hash;
     }
@@ -40,7 +35,6 @@ public class ViewExamsCommand implements Command {
     public List<String> getAttributeName() {
         List<String> list = new ArrayList();
         list.add("examList");
-        list.add("comment");
         return list;
     }
     

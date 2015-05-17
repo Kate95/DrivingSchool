@@ -27,12 +27,7 @@ public class ViewInstructorsCommand  implements Command {
 
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, Object> hash = new HashMap();        
-        List<Instructor> instructorList = DAOFactory.getInstance().getInstructorDAO().getAll();
-        if (instructorList.isEmpty()) {
-            hash.put("comment", "В базе нет требуемых данных");
-        } else {
-            hash.put("comment", null);
-        }    
+        List<Instructor> instructorList = DAOFactory.getInstance().getInstructorDAO().getAll();           
         hash.put("instructorList", instructorList);
         return hash;
     }
@@ -40,7 +35,6 @@ public class ViewInstructorsCommand  implements Command {
     public List<String> getAttributeName() {
         List<String> list = new ArrayList();
         list.add("instructorList");
-        list.add("comment");
         return list;
     }
     

@@ -20,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -41,7 +41,7 @@
                     <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
                     <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
                     <c:if test="${empty client&&empty admin}">
-                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                        <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
                     </c:if>
                     <c:if test="${not empty client}">
                         <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
@@ -52,54 +52,64 @@
                     </c:if>            
                 </form>
             </div>	
-            <div id="center"><br>                
-                <form action="Controller">
-                    <input type="hidden" name="client" value="${client}"/>
-                    <input type="hidden" name="admin" value="${admin}"/>
-                    Выберите слушателя:
-                    <table cellpadding="5" >
-                        <tr>                
-                            <td>ФИО</td>
-                            <td>Номер группы</td>
-                            <td>Дата рождения</td>
-                            <td>Телефон</td>    
-                            <td>Адрес</td>
-                            <td>Оплата обучения</td>  
-                            <td>Выбор</td>
-                        </tr>
-                        <c:forEach items="${studentList}" var="student" varStatus="status">
-                            <tr>                    
-                                <td>${student.studentName}</td>
-                                <td>${student.studyGroup.groupNumber}</td>
-                                <td><fmt:formatDate dateStyle="medium" type="date" value="${student.dateOfBirth}" /></td>
-                            <td>${student.phoneNumber}</td>                            
-                            <td>${student.address}</td> 
-                            <td>${paymentList[status.index]}</td>
-                            <td>
-                                <c:if test="${status.index == 0}">
-                                    <input type="radio" name="studentID" value="${student.studentID}" checked=""/>
-                                </c:if>
-                                <c:if test="${status.index != 0}">
-                                    <input type="radio" name="studentID" value="${student.studentID}"/>
-                                </c:if>                                
-                            </tr>
-                        </c:forEach>
-                    </table><br>
-                    Выберите тип зачета:
-                   <select name="examType">
-                        <c:forEach items="${examTypeList}" var="examType" varStatus="status">
-                            <c:if test="${status.index == 0}">
-                                <option value="${examType.examType}" selected="">${examType.examType}</option>
-                            </c:if>
-                            <c:if test="${status.index != 0}">
-                                <option value="${examType.examType}">${examType.examType}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>                       
-                    <p>Номер зачета:<input type="text" name="examNumber" value=""/></p>
-                    <p>Оценка (от 1 до 10):<input type="text" name="value" value=""/></p>
-                    <p><button type="submit" name="command" value="checkExamData">Подтвердить</button></p>
-                </form>
+            <div id="center"><br>          
+                <c:if test="${empty admin}">
+                    <p>У вас нет прав выполнять данное действие.</p>
+                </c:if>
+                <c:if test="${not empty admin}">
+                    <c:if test="${empty studentList || empty examTypeList}">
+                        <p>Не удалось взять из базы данные о слушателях или типах зачетов, или нужных данных нет в базе.</p>
+                    </c:if>
+                    <c:if test="${not empty studentList && not empty examTypeList}">
+                        <form action="Controller" method="post">
+                            <input type="hidden" name="client" value="${client}"/>
+                            <input type="hidden" name="admin" value="${admin}"/>
+                            Выберите слушателя:
+                            <table cellpadding="5" >
+                                <tr>                
+                                    <td>ФИО</td>
+                                    <td>Номер группы</td>
+                                    <td>Дата рождения</td>
+                                    <td>Телефон</td>    
+                                    <td>Адрес</td>
+                                    <td>Оплата обучения</td>  
+                                    <td>Выбор</td>
+                                </tr>
+                                <c:forEach items="${studentList}" var="student" varStatus="status">
+                                    <tr>                    
+                                        <td>${student.studentName}</td>
+                                        <td>${student.studyGroup.groupNumber}</td>
+                                        <td><fmt:formatDate dateStyle="medium" type="date" value="${student.dateOfBirth}" /></td>
+                                        <td>${student.phoneNumber}</td>                            
+                                        <td>${student.address}</td> 
+                                        <td>${paymentList[status.index]}</td>
+                                        <td>
+                                            <c:if test="${status.index == 0}">
+                                                <input type="radio" name="studentID" value="${student.studentID}" checked=""/>
+                                            </c:if>
+                                            <c:if test="${status.index != 0}">
+                                                <input type="radio" name="studentID" value="${student.studentID}"/>
+                                            </c:if>                                
+                                    </tr>
+                                </c:forEach>
+                            </table><br>
+                            Выберите тип зачета:
+                            <select name="examType">
+                                <c:forEach items="${examTypeList}" var="examType" varStatus="status">
+                                    <c:if test="${status.index == 0}">
+                                        <option value="${examType.examType}" selected="">${examType.examType}</option>
+                                    </c:if>
+                                    <c:if test="${status.index != 0}">
+                                        <option value="${examType.examType}">${examType.examType}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>                       
+                            <p>Номер зачета (от 1 до 59):<input type="text" name="examNumber" value="" required="" pattern="[1-9]|([1-5][0-9])"/></p>
+                            <p>Оценка (от 1 до 10):<input type="text" name="value" value="" required="" pattern="[1-9]|(10)"/></p>
+                            <p><button type="submit" name="command" value="checkExamData">Подтвердить</button></p>
+                        </form>
+                    </c:if>
+                </c:if>
             </div>
             <div id="footer"><br>
                 Автошкола "Виртуоз" E-mail:avtovirtuoz@mail.ru

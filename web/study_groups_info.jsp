@@ -20,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -53,28 +53,28 @@
                 </form>
             </div>	
             <div id="center"><br>  
-                <c:if test="${not empty comment}">
-                    <c:out value="${comment}"/>
+                <c:if test="${empty groupList}">
+                    <p>В базе нет требуемых данных или не был отправлен запрос к базе.</p>
                 </c:if>
-                <c:if test="${empty comment}">
-                <table cellpadding="5" >
-                    <tr>         
-                        <td>Номер группы</td>
-                        <td>Форма обучения</td>
-                        <td>Количество учащихся</td>
-                        <td>Начало обучения</td>
-                        <td>Окончание обучения</td>                
-                    </tr>
-                    <c:forEach items="${groupList}" var="group" varStatus="status">
-                        <tr>                    
-                            <td>${group.groupNumber}</td>
-                            <td>${group.formOfStudy.formOfStudy}</td>
-                            <td>${studNumList[status.index]}</td>
-                            <td><fmt:formatDate dateStyle="medium" type="date" value="${group.startDate}" /></td> 
-                            <td><fmt:formatDate dateStyle="medium" type="date" value="${group.endDate}" /></td>   
+                <c:if test="${not empty groupList}">
+                    <table cellpadding="5" >
+                        <tr>         
+                            <td>Номер группы</td>
+                            <td>Форма обучения</td>
+                            <td>Количество учащихся</td>
+                            <td>Начало обучения</td>
+                            <td>Окончание обучения</td>                
                         </tr>
-                    </c:forEach>
-                </table>
+                        <c:forEach items="${groupList}" var="group" varStatus="status">
+                            <tr>                    
+                                <td>${group.groupNumber}</td>
+                                <td>${group.formOfStudy.formOfStudy}</td>
+                                <td>${studNumList[status.index]}</td>
+                                <td><fmt:formatDate dateStyle="medium" type="date" value="${group.startDate}" /></td> 
+                                <td><fmt:formatDate dateStyle="medium" type="date" value="${group.endDate}" /></td>   
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </c:if>
             </div>
             <div id="footer"><br>

@@ -20,7 +20,7 @@
                 <br>Вас приветствует система учета слушателей автошколы "Виртуоз"<br>
             </div>
             <div id="left">
-                <form action="Controller">
+                <form action="Controller" method="post">
                     <c:if test="${empty client&&empty admin}">
                         <a href="login.jsp" >Авторизоваться</a><br><hr>
                     </c:if>
@@ -41,7 +41,7 @@
                     <button class="button" type="submit" name="command" value="viewCars">Автомобили</button><br>
                     <button class="button" type="submit" name="command" value="viewStudents">Слушатели</button><br>
                     <c:if test="${empty client&&empty admin}">
-                    <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
+                        <button class="button" type="submit" name="command" value="addStudent">Записаться в слушатели</button>
                     </c:if>
                     <c:if test="${not empty client}">
                         <button class="button" type="submit" name="command" value="viewExams">Информация о зачетах</button><br>
@@ -52,25 +52,35 @@
                     </c:if>            
                 </form>
             </div>	
-            <div id="center"><br>                
-                <form action="Controller">
-                    <input type="hidden" name="client" value="${client}"/>
-                    <input type="hidden" name="admin" value="${admin}"/>
-                    <p>Выберите слушателя:
-                    <select name="studentID">
-                        <c:forEach items="${studentList}" var="student" varStatus="status">
-                            <c:if test="${status.index == 0}">
-                                <option value="${student.studentID}" selected="">${student.studentName}</option>
-                            </c:if>
-                            <c:if test="${status.index != 0}">
-                                <option value="${student.studentID}">${student.studentName}</option>
-                            </c:if>                            
-                        </c:forEach>
-                    </select>                                
-                    </p>                                                    
-                    <p>Введите сумму:<input type="text" name="payment" value=""/></p>                   
-                    <p><button type="submit" name="command" value="checkPaymentData">Подтвердить</button></p>
-                </form>
+            <div id="center"><br> 
+                <c:if test="${empty client}">
+                    <p>У вас нет прав выполнять данное действие.</p>
+                </c:if>
+                <c:if test="${not empty client}">
+                    <c:if test="${empty studentList}">
+                        <p>Не удалось взять из базы данные о слушателях или нужных данных нет в базе.</p>
+                    </c:if>
+                    <c:if test="${not empty studentList}">
+                        <form action="Controller" method="post">
+                            <input type="hidden" name="client" value="${client}"/>
+                            <input type="hidden" name="admin" value="${admin}"/>
+                            <p>Выберите слушателя:
+                                <select name="studentID">
+                                    <c:forEach items="${studentList}" var="student" varStatus="status">
+                                        <c:if test="${status.index == 0}">
+                                            <option value="${student.studentID}" selected="">${student.studentName}</option>
+                                        </c:if>
+                                        <c:if test="${status.index != 0}">
+                                            <option value="${student.studentID}">${student.studentName}</option>
+                                        </c:if>                            
+                                    </c:forEach>
+                                </select>                                
+                            </p>                                                    
+                            <p>Введите сумму:<input type="text" name="payment" value="" required="" pattern="^[0-9]+$"/></p>                   
+                            <p><button type="submit" name="command" value="checkPaymentData">Подтвердить</button></p>
+                        </form>
+                    </c:if>
+                </c:if>
             </div>
             <div id="footer"><br>
                 Автошкола "Виртуоз" E-mail:avtovirtuoz@mail.ru

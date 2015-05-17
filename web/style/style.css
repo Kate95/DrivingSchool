@@ -32,16 +32,18 @@ div{
     padding-left: 20px;
     float:left;
     text-align:left;
-    width:265px;
-    height:490px;
+    width:270px;
+    height:auto;
+    min-height:480px;
 }
 
 #center{
     clear:none;
-    margin:0 0 0 285px;
+    margin:0 0 0 290px;
     padding-left: 10px;
     font-size:15px;
-    height:500px;
+    height:auto;
+    min-height:500px;
 }
 
 #footer{
@@ -51,10 +53,14 @@ div{
     height:40px;
 }
 
-
 a{   
     text-decoration: none;
     color: #444;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #708090;
 }
 
 .button{    
@@ -67,6 +73,22 @@ a{
     border-radius: 3px;
     padding: 8px 12px;
     text-decoration: none;    
+}
+
+.a_button{
+    border: 0;
+    background-color: #FFFFF0;
+    text-decoration: underline;
+    color: #708090;
+    font: bold 16px Georgia;
+}
+
+.a_button:hover{
+    border: 0;
+    background-color: #FFFFF0;
+    text-decoration: underline;
+    color: #444;
+    font: bold 16px Georgia;
 }
 
 table{    

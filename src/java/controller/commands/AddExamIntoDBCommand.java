@@ -38,7 +38,16 @@ public class AddExamIntoDBCommand implements Command {
         exam.setExamType(examType);
         exam.setValue(Integer.parseInt(request.getParameter("value")));
         exam.setExamNumber(Integer.parseInt(request.getParameter("examNumber")));
-        DAOFactory.getInstance().getExamDAO().create(exam);
+        List<Exam> examList = DAOFactory.getInstance().getExamDAO().getAll();
+        boolean fl = true;
+        for (Exam ex : examList) {
+            if (exam.getExamNumber() == ex.getExamNumber() && exam.getStudent().getStudentID() == ex.getStudent().getStudentID()) {
+                fl = false;
+            }
+        }
+        if (fl) {
+            DAOFactory.getInstance().getExamDAO().create(exam);
+        }         
         return hash;
     }
     
