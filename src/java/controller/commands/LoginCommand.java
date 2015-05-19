@@ -6,6 +6,7 @@
 
 package controller.commands;
 
+import controller.ConfigurationManager;
 import dao.DAOFactory;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,9 +29,11 @@ public class LoginCommand implements Command {
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     
             HashMap<String, Object> hash = new HashMap();
+            String admin_login = ConfigurationManager.getInstance().getProperty(ConfigurationManager.ADMIN_LOGIN);
+            String admin_password = ConfigurationManager.getInstance().getProperty(ConfigurationManager.ADMIN_PASSWORD);            
             String login=request.getParameter("login");
             String password=request.getParameter("password");
-            if(login.equals("admin")&&password.equals("admin")){
+            if(login.equals(admin_login)&&password.equals(admin_password)){
                 String admin="администратор";                
                 hash.put("admin", admin);
                 hash.put("client", null);

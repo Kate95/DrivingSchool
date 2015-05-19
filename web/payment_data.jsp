@@ -12,7 +12,7 @@
     <head>       
         <link rel="stylesheet" href="style/style.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Потверждение оплаты</title>
     </head>
     <body>
         <div id="maket">
@@ -27,11 +27,11 @@
                     </c:if>
                     <c:if test="${not empty client}">                        
                         <c:out value="Здравствуйте, ${client.studentName}"/><br>
-                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                        <button class="a_button" type="submit" name="command" value="logout">Выйти</button><br><hr>
                     </c:if>
                     <c:if test="${not empty admin}">
                         <c:out value="Здравствуйте, ${admin}"/><br>
-                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                        <button class="a_button" type="submit" name="command" value="logout">Выйти</button><br><hr>
                     </c:if>
                     <input type="hidden" name="client" value="${client}"/>
                     <input type="hidden" name="admin" value="${admin}"/>

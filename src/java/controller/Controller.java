@@ -38,8 +38,7 @@ public class Controller extends HttpServlet implements javax.servlet.Servlet{
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        
+        request.setCharacterEncoding("UTF-8");        
         HttpSession session = request.getSession(true);
         HashMap<String, Object> hash;
         List<String> list;

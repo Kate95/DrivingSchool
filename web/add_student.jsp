@@ -12,7 +12,7 @@
     <head>       
         <link rel="stylesheet" href="style/style.css" type="text/css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Запись в автошколу</title>
     </head>
     <body>
         <div id="maket">
@@ -27,11 +27,11 @@
                     </c:if>
                     <c:if test="${not empty client}">                        
                         <c:out value="Здравствуйте, ${client.studentName}"/><br>
-                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                        <button class="a_button" type="submit" name="command" value="logout">Выйти</button><br><hr>
                     </c:if>
                     <c:if test="${not empty admin}">
                         <c:out value="Здравствуйте, ${admin}"/><br>
-                        <a href="Controller?command=logout" >Выйти</a><br><hr>
+                        <button class="a_button" type="submit" name="command" value="logout">Выйти</button><br><hr>
                     </c:if>
                     <input type="hidden" name="client" value="${client}"/>
                     <input type="hidden" name="admin" value="${admin}"/>
@@ -94,7 +94,7 @@
                                 </c:forEach>
                             </table>
                             <c:if test="${not empty comment}">
-                                ФИО:<br><input type="text" name="studentName" value="${student.studentName}" required="" pattern="^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))$"/><br>
+                                ФИО (или Фамилия И.О.)::<br><input type="text" name="studentName" value="${student.studentName}" required="" pattern="^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))(( [А-ЯЁ][а-яё]+)|([\s]?[А-ЯЁ][.]))$"/><br>
                                 Дата рождения(yyyy-MM-dd):<br><input type="text" name="dateOfBirth" value="${birthDate}" pattern="^(19)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)$"/><br>
                                 Телефон((+xxxxx-)xxx-xx-xx):<br><input type="text" name="phoneNumber" value="${student.phoneNumber}" pattern="^[+]?([0-9]{5})?[-]?[0-9]{3}[-]?[0-9]{2}[-]?[0-9]{2}$"/><br>
                                 Адрес:<br><input type="text" name="address" value="${student.address}" pattern=""/><br>

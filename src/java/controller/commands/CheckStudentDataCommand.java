@@ -6,6 +6,7 @@
 
 package controller.commands;
 
+import controller.ConfigurationManager;
 import dao.DAOFactory;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -60,12 +61,18 @@ public class CheckStudentDataCommand implements Command {
         student.setDateOfBirth(date);
         int fl=0;
         for(Student st:students){
-            if(st.getLogin().equals(student.getLogin())){
+            if(st.getLogin().equals(student.getLogin())||st.getLogin().equals(ConfigurationManager.getInstance().getProperty(ConfigurationManager.ADMIN_LOGIN))){
                 fl=1;
             }
-            else if(st.getPassword().equals(student.getPassword())){
+            else if(st.getPassword().equals(student.getPassword())||st.getPassword().equals(ConfigurationManager.getInstance().getProperty(ConfigurationManager.ADMIN_PASSWORD))){
                 fl=2;
             }
+        }
+        if(student.getLogin().equals(ConfigurationManager.getInstance().getProperty(ConfigurationManager.ADMIN_LOGIN))){
+            fl=1;
+        }
+        else if(student.getPassword().equals(ConfigurationManager.getInstance().getProperty(ConfigurationManager.ADMIN_PASSWORD))){
+            fl=2;
         }
         if(fl == 0){
             hash.put("groupList", null);
@@ -87,8 +94,7 @@ public class CheckStudentDataCommand implements Command {
             hash.put("birthDate",request.getParameter("dateOfBirth"));
             page = "/add_student.jsp";
         }
-        hash.put("student", student);
-        
+        hash.put("student", student);        
         return hash;
     }
     
