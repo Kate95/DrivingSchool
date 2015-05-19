@@ -62,13 +62,27 @@
                         <tr>                
                             <td>ФИО</td>
                             <td>Дата рождения</td>
-                            <td>Телефон</td>                                   
+                            <td>Телефон</td>    
+                            <c:if test="${not empty admin}">
+                                <td>Действие</td>
+                            </c:if>
                         </tr>
                         <c:forEach items="${instructorList}" var="instructor">
                             <tr>                    
                                 <td>${instructor.instructorName}</td>
                                 <td><fmt:formatDate dateStyle="medium" type="date" value="${instructor.dateOfBirth}" /></td>
-                                <td>${instructor.phoneNumber}</td>                                             
+                                <td>${instructor.phoneNumber}</td>  
+                                <c:if test="${not empty admin}">
+                                    <td>
+                                        <form action="Controller" method="post">
+                                        <input type="hidden" name="client" value="${client}"/>
+                                        <input type="hidden" name="admin" value="${admin}"/>
+                                        <input type="hidden" name="instructorID" value="${instructor.instructorID}"/>
+                                        <button class="a_button" type="submit" name="command" value="editInstructor">Редактировать</button><br>
+                                        <button class="a_button" type="submit" name="command" value="deleteInstructor">Удалить</button>
+                                        </form>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </table>

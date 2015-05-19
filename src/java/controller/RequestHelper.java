@@ -12,12 +12,17 @@ import controller.commands.AddPaymentIntoDBCommand;
 import controller.commands.AddStudentCommand;
 import controller.commands.AddStudentIntoDBCommand;
 import controller.commands.CheckExamDataCommand;
+import controller.commands.CheckInstructorDataCommand;
 import controller.commands.CheckPaymentDataCommand;
 import controller.commands.CheckStudentDataCommand;
 import controller.commands.Command;
+import controller.commands.DeleteInstructorCommand;
+import controller.commands.DeleteInstructorFromDBCommand;
+import controller.commands.EditInstructorCommand;
 import controller.commands.LoginCommand;
 import controller.commands.LogoutCommand;
 import controller.commands.NoCommand;
+import controller.commands.UpdateInstructorInDBCommand;
 import controller.commands.ViewAllStudyFormsCommand;
 import controller.commands.ViewCarsCommand;
 import controller.commands.ViewExamsCommand;
@@ -55,6 +60,11 @@ public class RequestHelper {
         commands.put("addPayment", new AddPaymentCommand());
         commands.put("checkPaymentData", new CheckPaymentDataCommand());
         commands.put("addPaymentIntoDB", new AddPaymentIntoDBCommand());
+        commands.put("editInstructor", new EditInstructorCommand());
+        commands.put("checkInstructorData", new CheckInstructorDataCommand());
+        commands.put("updateInstructorInDB", new UpdateInstructorInDBCommand());
+        commands.put("deleteInstructor", new DeleteInstructorCommand());
+        commands.put("deleteInstructorFromDB", new DeleteInstructorFromDBCommand());
         commands.put("noCommand", new NoCommand());
     }
 

@@ -59,7 +59,7 @@
                 </c:if>
                 <c:if test="${empty client && empty admin}">
                     <c:if test="${empty student}">
-                        <p>Вы зашли на страницу, не введя предварительно необходимые данные об студенте.</p>
+                        <p>Вы зашли на страницу, не введя предварительно необходимые данные о студенте.</p>
                     </c:if>
                     <c:if test="${not empty student}">
                         <form action="Controller" method="post">

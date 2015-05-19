@@ -48,6 +48,7 @@ div{
 
 #center{
     clear:none;
+    border-left: #27408B 2px solid;
     margin:0 0 0 290px;
     padding-left: 20px;
     font-size:15px;
@@ -74,12 +75,14 @@ a:hover{
     color: #7EC0EE;
 }
 
-.button{    
+
+
+.button{   
+    background:linear-gradient(#6495ED,#ADD8E6);
     color: #000080;
     height: 50px;
     width: 200px;
-    font: bold 16px Georgia;
-    background: #6495ED;
+    font: bold 16px Georgia;    
     border: #D1EEEE 1px solid; 
     border-radius: 3px;
     padding: 8px 12px;
@@ -87,8 +90,8 @@ a:hover{
 }
 
 .button:hover{
-    background:linear-gradient(#6495ED,#ADD8E6);
-    color: #444;
+    background:linear-gradient(#6495ED,#000080);    
+    color: #ADD8E6;
 }
 
 .a_button{

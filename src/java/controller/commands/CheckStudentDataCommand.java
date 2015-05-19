@@ -30,7 +30,7 @@ import logic.StudyGroup;
  */
 public class CheckStudentDataCommand implements Command {
     
-    String page;
+    private String page;
     
     public CheckStudentDataCommand(){        
     }

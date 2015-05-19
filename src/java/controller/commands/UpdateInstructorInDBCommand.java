@@ -21,32 +21,24 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.Student;
-import logic.StudyGroup;
+import logic.Instructor;
 
 /**
  *
  * @author Kate
  */
-public class AddStudentIntoDBCommand implements Command {
+public class UpdateInstructorInDBCommand implements Command {
     
-    public AddStudentIntoDBCommand(){   
+    public UpdateInstructorInDBCommand(){   
     }
 
     public HashMap<String, Object> execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HashMap<String, Object> hash = new HashMap();
-        Student student = new Student();
-        Integer groupID = Integer.parseInt(request.getParameter("groupID"));
-        StudyGroup group = DAOFactory.getInstance().getStudyGroupDAO().read(groupID);
-        List<Student> students = DAOFactory.getInstance().getStudentDAO().getAll();
-        student.setStudentID((students.get(students.size() - 1).getStudentID()) + 1);
-        student.setStudyGroup(group);
-        student.setStudentName(request.getParameter("studentName"));
-        student.setAddress(request.getParameter("address"));
-        student.setPhoneNumber(request.getParameter("phoneNumber"));
-        student.setLogin(request.getParameter("login"));
-        student.setPassword(request.getParameter("password"));
+        Integer instructorID = Integer.parseInt(request.getParameter("instructorID"));
+        Instructor instructor = DAOFactory.getInstance().getInstructorDAO().read(instructorID);
+        instructor.setInstructorName(request.getParameter("instructorName"));
+        instructor.setPhoneNumber(request.getParameter("phoneNumber"));       
         DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         Date date = null;
         if (!request.getParameter("dateOfBirth").equals("")) {
@@ -56,8 +48,8 @@ public class AddStudentIntoDBCommand implements Command {
                 Logger.getLogger(CheckStudentDataCommand.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        student.setDateOfBirth(date);
-        DAOFactory.getInstance().getStudentDAO().create(student);
+        instructor.setDateOfBirth(date);
+        DAOFactory.getInstance().getInstructorDAO().update(instructor);
         return hash;
     }
 
@@ -70,3 +62,4 @@ public class AddStudentIntoDBCommand implements Command {
         return "/index.jsp";
     }
 }
+
