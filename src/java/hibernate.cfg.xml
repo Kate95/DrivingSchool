@@ -15,15 +15,15 @@
 	<property name="hibernate.connection.characterEncoding">UTF-8</property>
 	<property name="hibernate.connection.characterSetResults">UTF-8</property>
 
-    <mapping class="logic.Student" />
-	<mapping class="logic.FormOfStudy" />
-	<mapping class="logic.StudyGroup" />
-	<mapping class="logic.Account" />
-	<mapping class="logic.Car" />
-	<mapping class="logic.CarBrand" />
-	<mapping class="logic.Exam" />
-	<mapping class="logic.ExamType" />
-	<mapping class="logic.Instructor" />
-	<mapping class="logic.InstructorStudent" />
+        <mapping class="drivingschool.logic.Student" />
+	<mapping class="drivingschool.logic.FormOfStudy" />
+	<mapping class="drivingschool.logic.StudyGroup" />
+	<mapping class="drivingschool.logic.Account" />
+	<mapping class="drivingschool.logic.Car" />
+	<mapping class="drivingschool.logic.CarBrand" />
+	<mapping class="drivingschool.logic.Exam" />
+	<mapping class="drivingschool.logic.ExamType" />
+	<mapping class="drivingschool.logic.Instructor" />
+	<mapping class="drivingschool.logic.InstructorStudent" />
   </session-factory>
 </hibernate-configuration>

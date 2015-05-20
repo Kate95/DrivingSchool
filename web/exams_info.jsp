@@ -62,13 +62,15 @@
                     </c:if>
                     <c:if test="${not empty examList}">
                         <table cellpadding="5" >
-                            <tr>                
+                            <tr>   
+                                <td>ФИО слушателя</td>
                                 <td>Номер</td>
                                 <td>Тип</td>
-                                <td>Оценка</td>                                   
+                                <td>Оценка</td>                       
                             </tr>
                             <c:forEach items="${examList}" var="exam">
-                                <tr>                    
+                                <tr>  
+                                    <td>${exam.student.studentName}</td>
                                     <td>${exam.examNumber}</td>
                                     <td>${exam.examType.examType}</td>
                                     <td>${exam.value}</td>                                             

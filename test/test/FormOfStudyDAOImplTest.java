@@ -6,10 +6,10 @@
 
 package test;
 
-import dao.DAOFactory;
-import dao.FormOfStudyDAO;
+import drivingschool.dao.DAOFactory;
+import drivingschool.dao.FormOfStudyDAO;
 import java.sql.SQLException;
-import logic.FormOfStudy;
+import drivingschool.logic.FormOfStudy;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;

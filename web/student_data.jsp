@@ -89,7 +89,7 @@
                             <p><c:out value="Адрес: ${student.address}"/></p>
                             <input type="hidden" name="address" value="${student.address}"/>
                             <p><c:out value="Логин: ${student.login}"/></p>
-                            <input type="hidden" name="login" value="${student.address}"/>
+                            <input type="hidden" name="login" value="${student.login}"/>
                             <p><c:out value="Пароль: ${student.password}"/></p>
                             <input type="hidden" name="password" value="${student.password}"/>
                             <input type="hidden" name="groupID" value="${student.studyGroup.groupID}"/>

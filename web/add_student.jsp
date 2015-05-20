@@ -97,13 +97,13 @@
                                 ФИО (или Фамилия И.О.)::<br><input type="text" name="studentName" value="${student.studentName}" required="" pattern="^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))(( [А-ЯЁ][а-яё]+)|([\s]?[А-ЯЁ][.]))$"/><br>
                                 Дата рождения(yyyy-MM-dd):<br><input type="text" name="dateOfBirth" value="${birthDate}" pattern="^(19)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)$"/><br>
                                 Телефон((+xxxxx-)xxx-xx-xx):<br><input type="text" name="phoneNumber" value="${student.phoneNumber}" pattern="^[+]?([0-9]{5})?[-]?[0-9]{3}[-]?[0-9]{2}[-]?[0-9]{2}$"/><br>
-                                Адрес:<br><input type="text" name="address" value="${student.address}" pattern=""/><br>
+                                Адрес:<br><input type="text" name="address" value="${student.address}" pattern="^[a-zA-Zа-яёА-ЯЁ0-9.,/\s]+$"/><br>
                             </c:if>
                             <c:if test="${empty comment}">
-                                ФИО (или Фамилия И.О.):<br><input type="text" name="studentName" value="" required="" pattern="^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))$"/><br>
+                                ФИО (или Фамилия И.О.):<br><input type="text" name="studentName" value="" required="" pattern="^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)?(( [А-ЯЁ][а-яё]+)|( [А-ЯЁ][.]))(( [А-ЯЁ][а-яё]+)|([\s]?[А-ЯЁ][.]))$"/><br>
                                 Дата рождения(yyyy-MM-dd):<br><input type="text" name="dateOfBirth" value="" pattern="^(19)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)$"/><br>
                                 Телефон((+xxxxx-)xxx-xx-xx):<br><input type="text" name="phoneNumber" value="" pattern="^[+]?([0-9]{5})?[-]?[0-9]{3}[-]?[0-9]{2}[-]?[0-9]{2}$"/><br>
-                                Адрес:<br><input type="text" name="address" value="" pattern="^[a-zA-Zа-яёА-яЁ0-9.,/]+$"/><br>
+                                Адрес:<br><input type="text" name="address" value="" pattern="^[a-zA-Zа-яёА-ЯЁ0-9.,/\s]+$"/><br>
                             </c:if>                
                             Логин:<br><input type="text" name="login" value="" pattern="^[a-zA-Z][a-zA-Z0-9]{1,20}$" required=""/><br>
                             Пароль (не менее 4 символов):<br><input type="password" name="password" value="" pattern="^[a-zA-Z0-9]{4,45}$" required=""/><br>

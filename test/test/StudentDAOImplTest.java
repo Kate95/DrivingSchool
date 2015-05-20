@@ -6,13 +6,13 @@
 
 package test;
 
-import dao.DAOFactory;
-import dao.StudentDAO;
+import drivingschool.dao.DAOFactory;
+import drivingschool.dao.StudentDAO;
 import java.sql.SQLException;
 import java.util.Date;
-import logic.FormOfStudy;
-import logic.Student;
-import logic.StudyGroup;
+import drivingschool.logic.FormOfStudy;
+import drivingschool.logic.Student;
+import drivingschool.logic.StudyGroup;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
