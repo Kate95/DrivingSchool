@@ -7,6 +7,7 @@ package drivingschool.controller;
 
 import drivingschool.controller.commands.AddExamIntoDBCommand;
 import drivingschool.controller.commands.AddExamResultCommand;
+import drivingschool.controller.commands.AddInstructorCommand;
 import drivingschool.controller.commands.AddPaymentCommand;
 import drivingschool.controller.commands.AddPaymentIntoDBCommand;
 import drivingschool.controller.commands.AddStudentCommand;
@@ -61,6 +62,7 @@ public class RequestHelper {
         commands.put("checkPaymentData", new CheckPaymentDataCommand());
         commands.put("addPaymentIntoDB", new AddPaymentIntoDBCommand());
         commands.put("editInstructor", new EditInstructorCommand());
+        commands.put("addInstructor", new AddInstructorCommand());
         commands.put("checkInstructorData", new CheckInstructorDataCommand());
         commands.put("updateInstructorInDB", new UpdateInstructorInDBCommand());
         commands.put("deleteInstructor", new DeleteInstructorCommand());

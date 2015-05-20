@@ -36,10 +36,19 @@ public class UpdateInstructorInDBCommand implements Command {
     public HashMap<String, Object> execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HashMap<String, Object> hash = new HashMap();
+        List<Instructor> instructors = DAOFactory.getInstance().getInstructorDAO().getAll();
+        Instructor instructor;
+        boolean flagCreate = false;
         Integer instructorID = Integer.parseInt(request.getParameter("instructorID"));
-        Instructor instructor = DAOFactory.getInstance().getInstructorDAO().read(instructorID);
+        if (instructorID > instructors.get(instructors.size() - 1).getInstructorID()) {
+            instructor = new Instructor();
+            instructor.setInstructorID(instructorID);
+            flagCreate = true;
+        } else {
+            instructor = DAOFactory.getInstance().getInstructorDAO().read(instructorID);
+        }
         instructor.setInstructorName(request.getParameter("instructorName"));
-        instructor.setPhoneNumber(request.getParameter("phoneNumber"));       
+        instructor.setPhoneNumber(request.getParameter("phoneNumber"));
         DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         Date date = null;
         if (!request.getParameter("dateOfBirth").equals("")) {
@@ -50,7 +59,11 @@ public class UpdateInstructorInDBCommand implements Command {
             }
         }
         instructor.setDateOfBirth(date);
-        DAOFactory.getInstance().getInstructorDAO().update(instructor);
+        if (flagCreate) {
+            DAOFactory.getInstance().getInstructorDAO().create(instructor);
+        } else {
+            DAOFactory.getInstance().getInstructorDAO().update(instructor);
+        }
         return hash;
     }
 

@@ -72,8 +72,12 @@
                             <input type="hidden" name="dateOfBirth" value="${instructor.dateOfBirth}"/>
                             <p><c:out value="Телефон: ${instructor.phoneNumber}"/></p>
                             <input type="hidden" name="phoneNumber" value="${instructor.phoneNumber}"/>
-                            
-                            <p><button type="submit" name="command" value="updateInstructorInDB">Сохранить</button></p>
+                            <c:if test="${not empty creation}">
+                                <p><button class="action_button" type="submit" name="command" value="updateInstructorInDB">Добавить</button></p>
+                            </c:if>
+                            <c:if test="${empty creation}">
+                                <p><button class="action_button" type="submit" name="command" value="updateInstructorInDB">Сохранить</button></p>
+                            </c:if>
                         </form>
                     </c:if>
                 </c:if>

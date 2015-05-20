@@ -70,7 +70,7 @@
                             <p><c:out value="Сумма, которая будет зачислена на счет: ${payment}"/></p>
                             <input type="hidden" name="payment" value="${payment}"/>                 
                             <input type="hidden" name="accountNumber" value="${account.accountNumber}"/>
-                            <p><button type="submit" name="command" value="addPaymentIntoDB">Оплатить</button></p>
+                            <p><button class="action_button" type="submit" name="command" value="addPaymentIntoDB">Оплатить</button></p>
                         </form>
                     </c:if>
                 </c:if>

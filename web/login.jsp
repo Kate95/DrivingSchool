@@ -61,7 +61,7 @@
                     <form action="Controller" method="post">
                         <p>Логин:<br><input type="text" name="login" value="" pattern="^[a-zA-Z][a-zA-Z0-9]{1,20}$" required=""/></p>
                         <p>Пароль (не менее 4 символов):<br><input type="password" name="password" value="" pattern="^[a-zA-Z0-9]{4,45}$" required=""/></p>
-                        <p><button type="submit" name="command" value="login">Войти</button></p>
+                        <p><button class="action_button" type="submit" name="command" value="login">Войти</button></p>
                     </form>
                 </c:if>
             </div> 

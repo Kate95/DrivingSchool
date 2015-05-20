@@ -86,6 +86,11 @@
                             </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${not empty admin}">
+                        <form action="Controller" method="post"><br>
+                            <button class="action_button" type="submit" name="command" value="addInstructor">Добавить нового инструктора</button>
+                        </form>
+                    </c:if>
                 </c:if>
             </div>
             <div id="footer"><br>

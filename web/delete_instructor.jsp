@@ -71,7 +71,7 @@
                             <p><c:out value="Телефон: ${instructor.phoneNumber}"/></p>     
                             
                             <br><p>Вы уверены что хотите удалить информацию о данном инструкторе?</p>
-                            <p><button type="submit" name="command" value="deleteInstructorFromDB">Удалить</button></p>
+                            <p><button class="action_button" type="submit" name="command" value="deleteInstructorFromDB">Удалить</button></p>
                         </form>
                     </c:if>
                 </c:if>

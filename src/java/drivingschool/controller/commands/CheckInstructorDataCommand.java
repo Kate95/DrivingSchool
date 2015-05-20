@@ -35,8 +35,17 @@ public class CheckInstructorDataCommand implements Command {
     public HashMap<String, Object> execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     
         HashMap<String, Object> hash = new HashMap();
+        List<Instructor> instructors = DAOFactory.getInstance().getInstructorDAO().getAll();
+        Instructor instructor;    
         Integer instructorID = Integer.parseInt(request.getParameter("instructorID"));
-        Instructor instructor = DAOFactory.getInstance().getInstructorDAO().read(instructorID);
+        if (instructorID > instructors.get(instructors.size() - 1).getInstructorID()) {
+            instructor = new Instructor();
+            instructor.setInstructorID(instructorID);  
+            hash.put("creation","creation");
+        } else {
+            instructor = DAOFactory.getInstance().getInstructorDAO().read(instructorID);
+            hash.put("creation",null);
+        }
         instructor.setInstructorName(request.getParameter("instructorName"));
         instructor.setPhoneNumber(request.getParameter("phoneNumber"));        
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -56,7 +65,8 @@ public class CheckInstructorDataCommand implements Command {
     @Override
     public List<String> getAttributeName() {
         List<String> list = new ArrayList(); 
-        list.add("instructor");       
+        list.add("instructor");
+        list.add("creation");
         return list;
     }
     

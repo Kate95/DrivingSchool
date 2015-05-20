@@ -107,7 +107,7 @@
                             </c:if>                
                             Логин:<br><input type="text" name="login" value="" pattern="^[a-zA-Z][a-zA-Z0-9]{1,20}$" required=""/><br>
                             Пароль (не менее 4 символов):<br><input type="password" name="password" value="" pattern="^[a-zA-Z0-9]{4,45}$" required=""/><br>
-                            <p><button type="submit" name="command" value="checkStudentData">Подтвердить</button></p>
+                            <p><button class="action_button" type="submit" name="command" value="checkStudentData">Подтвердить</button></p>
                         </form>
                     </c:if>
                 </c:if>

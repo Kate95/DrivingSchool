@@ -89,11 +89,10 @@
                             <p><c:out value="Адрес: ${student.address}"/></p>
                             <input type="hidden" name="address" value="${student.address}"/>
                             <p><c:out value="Логин: ${student.login}"/></p>
-                            <input type="hidden" name="login" value="${student.login}"/>
-                            <p><c:out value="Пароль: ${student.password}"/></p>
+                            <input type="hidden" name="login" value="${student.login}"/>                            
                             <input type="hidden" name="password" value="${student.password}"/>
                             <input type="hidden" name="groupID" value="${student.studyGroup.groupID}"/>
-                            <p><button type="submit" name="command" value="addStudentIntoDB">Записаться</button></p>
+                            <p><button class="action_button" type="submit" name="command" value="addStudentIntoDB">Записаться</button></p>
                         </form>
                     </c:if>
                 </c:if>

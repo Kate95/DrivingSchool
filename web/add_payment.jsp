@@ -78,7 +78,7 @@
                                 </select>                                
                             </p>                                                    
                             <p>Введите сумму:<input type="text" name="payment" value="" required="" pattern="^[0-9]+$"/></p>                   
-                            <p><button type="submit" name="command" value="checkPaymentData">Подтвердить</button></p>
+                            <p><button class="action_button" type="submit" name="command" value="checkPaymentData">Подтвердить</button></p>
                         </form>
                     </c:if>
                 </c:if>

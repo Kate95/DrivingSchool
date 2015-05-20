@@ -70,7 +70,7 @@
                             Дата рождения(yyyy-MM-dd):<br><input type="text" name="dateOfBirth" value="${birthDate}" pattern="^(19)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)$"/><br>
                             Телефон((+xxxxx-)xxx-xx-xx):<br><input type="text" name="phoneNumber" value="${instructor.phoneNumber}" pattern="^[+]?([0-9]{5})?[-]?[0-9]{3}[-]?[0-9]{2}[-]?[0-9]{2}$"/><br>                            
                             <p>
-                                <button type="submit" name="command" value="checkInstructorData">Подтвердить</button>
+                                <button class="action_button" type="submit" name="command" value="checkInstructorData">Подтвердить</button>
                                 <br><br><a class="a_button" href="instructors_info.jsp">Вернуться назад</a><br>
                             </p>
                         </form>

@@ -107,7 +107,7 @@
                             </select>                       
                             <p>Номер зачета (от 1 до 59):<input type="text" name="examNumber" value="" required="" pattern="[1-9]|([1-5][0-9])"/></p>
                             <p>Оценка (от 1 до 10):<input type="text" name="value" value="" required="" pattern="[1-9]|(10)"/></p>
-                            <p><button type="submit" name="command" value="checkExamData">Подтвердить</button></p>
+                            <p><button class="action_button" type="submit" name="command" value="checkExamData">Подтвердить</button></p>
                         </form>
                     </c:if>
                 </c:if>

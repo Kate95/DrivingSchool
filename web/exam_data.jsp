@@ -93,7 +93,7 @@
                                 <p><c:out value="Оценка: ${exam.value}"/></p>
                                 <input type="hidden" name="value" value="${exam.value}"/>
                                 <input type="hidden" name="studentID" value="${exam.student.studentID}"/>
-                                <p><button type="submit" name="command" value="addExamIntoDB">Добавить</button></p>
+                                <p><button class="action_button" type="submit" name="command" value="addExamIntoDB">Добавить</button></p>
                             </form>
                         </c:if>
                     </c:if>

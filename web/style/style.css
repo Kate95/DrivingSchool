@@ -143,4 +143,19 @@ td{
     height: 150px;        
 }
 
+.action_button{   
+    background:linear-gradient(#6495ED,#ADD8E6);
+    color: #000080;
+       
+    font: bold 16px Georgia;    
+    border: #D1EEEE 1px solid; 
+    border-radius: 3px;
+    padding: 8px 12px;
+    text-decoration: none;    
+}
+
+.action_button:hover{
+    background:linear-gradient(#6495ED,#000080);    
+    color: #ADD8E6;
+}
 
